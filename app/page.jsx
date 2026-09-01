@@ -72,10 +72,22 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="stats">
-            <div className="stat" data-reveal><div className="num"><span data-count="24">0</span><em>/7</em></div><div className="lbl">Coverage, including night supervision</div></div>
-            <div className="stat" data-reveal style={{ '--d': '.1s' }}><div className="num"><span data-count="245">0</span><em>D</em></div><div className="lbl">Licensed by Minnesota DHS</div></div>
-            <div className="stat" data-reveal style={{ '--d': '.2s' }}><div className="num"><span data-count="4">0</span><em>+</em></div><div className="lbl">Waiver programs &middot; CADI, BI, DD, EW</div></div>
+          <div className="stats-band" data-reveal>
+            <div className="cell">
+              <div className="num"><span data-count="5">0</span></div>
+              <div className="lbl">Languages our caregivers use</div>
+              <p className="txt">English, Spanish, Korean, ASL, and Hmong. Care lands better in the language your family already speaks.</p>
+            </div>
+            <div className="cell">
+              <div className="num">0</div>
+              <div className="lbl">Current waitlist</div>
+              <p className="txt">Our DSP network runs deep, so care starts fast instead of sitting in a queue. Need it? You&apos;ll have it.</p>
+            </div>
+            <div className="cell">
+              <div className="num"><span data-count="24">0</span><em>/7</em></div>
+              <div className="lbl">On-call support</div>
+              <p className="txt">An emergency, or a rough overnight? An on-call DSP picks up, any hour.</p>
+            </div>
           </div>
         </div>
       </section>
