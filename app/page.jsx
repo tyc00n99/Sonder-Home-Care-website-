@@ -154,7 +154,7 @@ export default function Home() {
           </div>
           <ServicesAccordion />
           <p className="svc-note" data-reveal>
-            We provide most basic and intensive services under chapter 245D, beyond the four above. We do not provide community residential services, crisis respite, integrated community supports, or ICF/DD services. Not sure where a client fits? Ask us.
+            We provide most basic and intensive services under chapter 245D, beyond the four above. We do not provide community residential services, crisis respite, integrated community supports, or ICF/DD services. Not sure where a client fits? Ask us.{' '}<Link href="/services" style={{ fontWeight: 600, color: 'var(--copper-deep)' }}>Read the full services guide &rarr;</Link>
           </p>
         </div>
       </section>
