@@ -26,7 +26,7 @@ export default function ServicesPage() {
               <a href="#nights">Night Supervision</a>
               <a href="#respite">Respite</a>
               <a href="#homemaker">Homemaker</a>
-              <a href="#pays">Who pays?</a>
+              <a href="#pays">Payment</a>
             </div>
           </div>
 
@@ -147,7 +147,7 @@ export default function ServicesPage() {
           </div>
 
           <div className="info-band" id="pays" data-reveal style={{ scrollMarginTop: 130 }}>
-            <h3>Who pays for this?</h3>
+            <h3>How it gets paid for.</h3>
             <p>
               <span className="peach">Not Medicare.</span> Medicare covers short-term care after a hospital stay, then it stops.
             </p>
@@ -162,11 +162,11 @@ export default function ServicesPage() {
           </div>
 
           <p className="svc-note" data-reveal style={{ marginTop: 36 }}>
-            Beyond these four, we provide most basic and intensive services under chapter 245D. We do not provide community residential services, crisis respite, integrated community supports, or ICF/DD services. Not sure where a client fits? Ask us and we&apos;ll tell you straight.
+            Beyond these four, we provide most basic and intensive services under chapter 245D. We do not provide community residential services, crisis respite, integrated community supports, or ICF/DD services. If you&apos;re not sure where a client fits, ask us and we&apos;ll tell you straight.
           </p>
 
           <div className="careers-strip" style={{ marginTop: 40, marginBottom: 0 }}>
-            <div className="cs-t">Not sure which service or which waiver? That&apos;s a normal place to be. One conversation sorts it out.</div>
+            <div className="cs-t">Choosing the right service and waiver is confusing at first, for everyone. One conversation sorts it out.</div>
             <Link className="btn btn-copper" href="/#contact">Talk to our team <span className="arr">&rarr;</span></Link>
           </div>
         </div>
