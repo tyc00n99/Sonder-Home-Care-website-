@@ -19,7 +19,7 @@ export default function FamiliesPage() {
             <div className="eyebrow">For Families</div>
             <h2>You&apos;ve been the whole care team. You don&apos;t have to be.</h2>
             <p className="lede" style={{ marginTop: 16, maxWidth: 620 }}>
-              If you&apos;re here, you&apos;re probably already doing this job: the medications, the overnights, the appointments, the worry. This page covers the three things families ask us most. How it gets paid for. What it gives you back. And how to judge any provider in Minnesota, including us.
+              If you&apos;re here, you&apos;re probably already doing this job: the medications, the overnights, the appointments, the worry. This page covers the three things families ask us most. How it gets paid for. What it gives you back. And what working with us actually looks like.
             </p>
           </div>
 
@@ -41,12 +41,9 @@ export default function FamiliesPage() {
           <div style={{ marginTop: 72 }} data-reveal>
             <div className="eyebrow">What it gives you back</div>
             <h2 style={{ maxWidth: 640 }}>Caring for someone you love shouldn&apos;t cost you everything else.</h2>
-            <div className="bigstat-row">
-              <div className="bigstat"><div className="n">18<em> hrs</em></div><div className="d">The average week of unpaid care a family caregiver provides, on top of everything else in their life.</div></div>
-              <div className="bigstat"><div className="n">$7,200<em>/yr</em></div><div className="d">What the average family caregiver spends out of pocket on the person they care for.</div></div>
-              <div className="bigstat"><div className="n">75<em>%+</em></div><div className="d">Family caregivers who report burnout. For most it isn&apos;t occasional. It&apos;s weekly.</div></div>
-            </div>
-            <p className="src-note">Sources: AARP, Valuing the Invaluable (2023); A Place for Mom caregiver statistics (2026).</p>
+            <p className="lede" style={{ marginTop: 14, maxWidth: 620 }}>
+              You already know the weight: the 5am alarm, the lifting, the pharmacy runs, the nights you sleep with one ear open. Here is what starts to change when we carry a share of it.
+            </p>
             <div className="askrow" style={{ marginTop: 34 }}>
               <div className="q"><span className="qn">What changes when we start</span>Nights become nights again.</div>
               <div className="a">Night supervision means someone trained is awake in the house so you don&apos;t have to be. Families tell us the first full week of sleep felt like a different life.</div>
@@ -62,35 +59,35 @@ export default function FamiliesPage() {
           </div>
 
           <div style={{ marginTop: 88 }} data-reveal>
-            <div className="eyebrow">Choosing a provider</div>
-            <h2 style={{ maxWidth: 680 }}>Six questions to ask any provider in Minnesota. Here&apos;s how we answer them.</h2>
+            <div className="eyebrow">The Sonder standard</div>
+            <h2 style={{ maxWidth: 680 }}>What working with us actually looks like.</h2>
             <p className="lede" style={{ marginTop: 14, maxWidth: 640 }}>
-              There are hundreds of 245D providers in this state. Ask these six questions of every one you interview, ours included. The good ones won&apos;t flinch.
+              Every provider promises good care. These are the specifics we put in writing.
             </p>
             <div style={{ marginTop: 36 }}>
               <div className="askrow">
-                <div className="q"><span className="qn">Question 01</span>&quot;Will we meet the actual caregiver before services start?&quot;</div>
-                <div className="a"><b>Yes, always.</b> You meet the person who will be in your home before the first shift, not a salesperson who vanishes afterward. If the fit is wrong, we recast before we start.</div>
+                <div className="q"><span className="qn">01</span>You meet your caregiver first.</div>
+                <div className="a">Before the first shift, not after. If the fit is wrong, <b>we recast before we start</b>.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">Question 02</span>&quot;How experienced are your caregivers?&quot;</div>
-                <div className="a">We only hire DSPs with <b>two or more years of experience</b> supporting people with intellectual disabilities or on a waiver, and every hire passes a background check. Most agencies hire at zero. We think your family is a strange place to start learning.</div>
+                <div className="q"><span className="qn">02</span>Experienced hands only.</div>
+                <div className="a">Every DSP has <b>two or more years</b> supporting people with disabilities, and every hire passes a background check. Your family is a strange place to start learning.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">Question 03</span>&quot;What languages does your team speak?&quot;</div>
-                <div className="a"><b>English, Spanish, Korean, ASL, and Hmong.</b> Care lands better in the language your family already speaks at the kitchen table.</div>
+                <div className="q"><span className="qn">03</span>Your language, spoken here.</div>
+                <div className="a"><b>English, Spanish, Korean, ASL, and Hmong.</b> Care lands better in the language your family speaks at the kitchen table.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">Question 04</span>&quot;How long is your waitlist?&quot;</div>
-                <div className="a"><b>We don&apos;t have one.</b> Our DSP network runs deep enough that care starts fast. Any provider who can&apos;t answer this question with a number is answering it.</div>
+                <div className="q"><span className="qn">04</span>No waitlist.</div>
+                <div className="a">Our DSP network runs deep, so <b>care starts fast</b> instead of sitting in a queue.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">Question 05</span>&quot;Who answers at 2am?&quot;</div>
-                <div className="a"><b>An on-call DSP, every hour of every night.</b> Emergencies and rough overnights don&apos;t schedule themselves for business hours.</div>
+                <div className="q"><span className="qn">05</span>Someone answers at 2am.</div>
+                <div className="a"><b>An on-call DSP, every hour of every night.</b> Emergencies don&apos;t keep business hours.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">Question 06</span>&quot;How will we know how care is going?&quot;</div>
-                <div className="a">Every shift is documented in 245D format, progress reports go out on schedule, and incidents are reported the way the state requires. <b>You will never have to chase us for an update.</b> If a provider gets vague here, keep interviewing.</div>
+                <div className="q"><span className="qn">06</span>You&apos;ll never chase an update.</div>
+                <div className="a">Every shift documented, progress reports on schedule, incidents reported <b>the way the state requires</b>.</div>
               </div>
             </div>
           </div>
@@ -131,7 +128,7 @@ export default function FamiliesPage() {
           </div>
 
           <div className="careers-strip" style={{ marginTop: 56, marginBottom: 0 }}>
-            <div className="cs-t">Bring us your six questions. Bring harder ones. We reply within one business day, and the first conversation costs nothing.</div>
+            <div className="cs-t">Bring us your questions, the hard ones included. We reply within one business day, and the first conversation costs nothing.</div>
             <Link className="btn btn-copper" href="/#contact">Talk to our team <span className="arr">&rarr;</span></Link>
           </div>
         </div>
