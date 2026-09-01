@@ -322,6 +322,9 @@
   .form .btn{justify-content:center;background:var(--copper);color:#FFF8F0;margin-top:6px}
   .form .fine{font-size:12px;color:rgba(240,238,230,.85)}
   .form-ok{display:none;padding:18px;border:1px solid #F5BD8E;border-radius:12px;color:#F2E3CF;font-size:14.5px}
+  .form-err{padding:18px;border:1px solid rgba(218,120,66,.7);border-radius:12px;color:#F5BD8E;font-size:14.5px}
+  .form-err a{text-decoration:underline}
+  .contact-addr .a a{text-decoration:underline;text-underline-offset:3px}
 
   @media (prefers-reduced-motion: reduce){.cov-car{display:none}}
 

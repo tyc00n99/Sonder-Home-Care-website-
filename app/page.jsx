@@ -37,7 +37,7 @@ export default function Home() {
               </p>
               <div className="hero-ctas" data-reveal style={{ '--d': '.16s' }}>
                 <Link className="btn btn-copper" href="/professionals#refer">Refer a client <span className="arr">&rarr;</span></Link>
-                <Link className="btn btn-dark" href="/#about">Talk to our team</Link>
+                <a className="btn btn-dark" href="#contact">Talk to our team</a>
               </div>
               <div className="trust-row" data-reveal style={{ '--d': '.24s' }}>
                 <span><Check />245D Licensed &middot; MN DHS</span>
@@ -185,6 +185,12 @@ export default function Home() {
                 <div className="contact-addr">
                   <div className="h">Headquarters</div>
                   <div className="a">7825 Washington Ave South, Suite 300A<br />Bloomington, MN 55439</div>
+                  <div className="h" style={{ marginTop: 18 }}>Reach us</div>
+                  <div className="a">
+                    <a href="tel:+16514176115">651-417-6115</a><br />
+                    <a href="mailto:Admin@sonderhomecaremn.com">Admin@sonderhomecaremn.com</a><br />
+                    Fax +1 651-386-0383
+                  </div>
                 </div>
               </div>
               <ContactForm />

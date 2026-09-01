@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PageFx from '@/components/PageFx';
+import CareersForm from '@/components/CareersForm';
 
 export const metadata = {
   title: 'Careers',
@@ -70,9 +71,29 @@ export default function CareersPage() {
               </div>
             ))}
           </div>
-          <div className="careers-strip">
-            <div className="cs-t">Ready to apply? Use the contact form, pick &quot;Job applicant,&quot; and tell us which role you&apos;re after.</div>
-            <Link className="btn btn-copper" href="/#contact">Apply now <span className="arr">&rarr;</span></Link>
+          <div id="apply" style={{ marginTop: 64, scrollMarginTop: 130 }}>
+            <div className="contact" data-reveal>
+              <div className="contact-inner">
+                <div>
+                  <div className="eyebrow">Apply</div>
+                  <h2>Tell us who you are.</h2>
+                  <p className="lede" style={{ marginTop: 16 }}>One short form. A real person reads it, and you hear back within one business day.</p>
+                  <div className="contact-points">
+                    <div className="cpoint">Four roles open now</div>
+                    <div className="cpoint">Every role requires a passed background check</div>
+                    <div className="cpoint">Resumes go to Admin@sonderhomecaremn.com</div>
+                  </div>
+                  <div className="contact-addr">
+                    <div className="h">Reach us</div>
+                    <div className="a">
+                      <a href="tel:+16514176115">651-417-6115</a><br />
+                      <a href="mailto:Admin@sonderhomecaremn.com">Admin@sonderhomecaremn.com</a>
+                    </div>
+                  </div>
+                </div>
+                <CareersForm />
+              </div>
+            </div>
           </div>
         </div>
       </section>

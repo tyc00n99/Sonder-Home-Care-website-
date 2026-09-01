@@ -11,7 +11,9 @@ export default function Footer() {
               Licensed under Minnesota DHS Chapter 245D<br />
               UMPI: A853450800<br />
               7825 Washington Ave South, Suite 300A<br />
-              Bloomington, MN 55439
+              Bloomington, MN 55439<br />
+              <a href="tel:+16514176115">651-417-6115</a> &middot; Fax +1 651-386-0383<br />
+              <a href="mailto:Admin@sonderhomecaremn.com">Admin@sonderhomecaremn.com</a>
             </p>
           </div>
           <div className="foot-cols">
