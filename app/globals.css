@@ -254,7 +254,7 @@
   .compare-col h3{font-family:var(--serif);font-weight:400;font-size:26px;letter-spacing:-.02em;padding:0 40px;margin-bottom:10px}
   .compare-col p{padding:0 40px;font-size:15px;max-width:420px}
   .compare-col.them p{color:var(--taupe)}
-  .compare-col.us p{color:rgba(240,238,230,.72)}
+  .compare-col.us p{color:#F0EEE6}
   .marquee{margin-top:30px;display:grid;gap:12px;
     mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);
     -webkit-mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);}
@@ -297,19 +297,19 @@
   .contact-inner{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,80px);padding:clamp(40px,6vw,76px)}
   .contact .eyebrow{color:#F5BD8E}
   .contact h2{color:var(--cream)}
-  .contact .lede{color:rgba(240,238,230,.66)}
+  .contact .lede{color:#F0EEE6}
   .contact-points{display:grid;gap:18px;margin-top:36px}
-  .cpoint{display:flex;gap:14px;align-items:baseline;font-size:15px;color:rgba(240,238,230,.85)}
+  .cpoint{display:flex;gap:14px;align-items:baseline;font-size:15px;color:#F0EEE6}
   .cpoint::before{content:"";width:6px;height:6px;border-radius:50%;background:#F5BD8E;flex:none;transform:translateY(-2px)}
   .contact-addr{
     margin-top:36px;padding-top:24px;border-top:1px solid rgba(240,238,230,.14);
   }
-  .contact-addr .h{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,238,230,.5);margin-bottom:8px}
-  .contact-addr .a{font-size:15px;color:rgba(240,238,230,.85);line-height:1.7}
+  .contact-addr .h{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#F5BD8E;margin-bottom:8px}
+  .contact-addr .a{font-size:15px;color:#F0EEE6;line-height:1.7}
   .form{display:grid;gap:14px}
-  .form label{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,238,230,.6)}
+  .form label{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#F0EEE6}
   .form input,.form select,.form textarea{
-    width:100%;background:rgba(240,238,230,.07);border:1px solid rgba(240,238,230,.18);
+    width:100%;background:rgba(240,238,230,.1);border:1px solid rgba(240,238,230,.38);
     border-radius:12px;padding:13px 16px;color:var(--cream);font-family:var(--sans);font-size:15px;
     transition:border-color .25s,background .25s;
   }
@@ -317,9 +317,10 @@
   .form select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F0EEE6' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
   .form select option{color:var(--ink);background:var(--cream)}
   .form textarea{min-height:100px;resize:vertical}
+  .form input::placeholder,.form textarea::placeholder{color:rgba(240,238,230,.6)}
   .form .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .form .btn{justify-content:center;background:var(--copper);color:#FFF8F0;margin-top:6px}
-  .form .fine{font-size:12px;color:rgba(240,238,230,.5)}
+  .form .fine{font-size:12px;color:rgba(240,238,230,.85)}
   .form-ok{display:none;padding:18px;border:1px solid #F5BD8E;border-radius:12px;color:#F2E3CF;font-size:14.5px}
 
   @media (prefers-reduced-motion: reduce){.cov-car{display:none}}
