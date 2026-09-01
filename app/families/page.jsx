@@ -19,23 +19,8 @@ export default function FamiliesPage() {
             <div className="eyebrow">For Families</div>
             <h2>You&apos;ve been the whole care team. You don&apos;t have to be.</h2>
             <p className="lede" style={{ marginTop: 16, maxWidth: 620 }}>
-              If you&apos;re here, you&apos;re probably already doing this job: the medications, the overnights, the appointments, the worry. This page covers the three things families ask us most. How it gets paid for. What it gives you back. And what working with us actually looks like.
+              If you&apos;re here, you&apos;re probably already doing this job: the medications, the overnights, the appointments, the worry. This page covers the two things families ask us most: what it gives you back, and what working with us actually looks like. How it all gets paid for lives on the <Link href="/services#pays" style={{ fontWeight: 600, color: 'var(--copper-deep)' }}>services page</Link>.
             </p>
-          </div>
-
-          <div className="info-band" data-reveal style={{ marginTop: 40 }}>
-            <h3>The money part, in plain words.</h3>
-            <p>
-              <span className="peach">Medicare will not pay for this.</span> It covers short-term skilled care after a hospital stay, then stops. Ongoing help at home, the kind your family actually needs, is exactly what it excludes.
-            </p>
-            <p>
-              What pays instead is Minnesota&apos;s Medical Assistance through waiver programs: <span className="peach">CADI, Brain Injury, DD, and the Elderly Waiver</span>. If your person qualifies, services like ours typically cost your family nothing out of pocket. Most families have never heard of these programs until someone tells them. Consider yourself told.
-            </p>
-            <div className="info-steps">
-              <div className="istep"><div className="k">Start here</div><p>Call your county or tribal agency and request a MnCHOICES assessment. It&apos;s free, and they must complete it within 45 days.</p></div>
-              <div className="istep"><div className="k">Then</div><p>A case manager is assigned and builds a support plan around your person&apos;s actual needs.</p></div>
-              <div className="istep"><div className="k">Your choice</div><p>The provider is your decision, by law. And if a provider disappoints you, you can switch. Remember that.</p></div>
-            </div>
           </div>
 
           <div style={{ marginTop: 72 }} data-reveal>
@@ -79,7 +64,7 @@ export default function FamiliesPage() {
               </div>
               <div className="askrow">
                 <div className="q"><span className="qn">Step 04</span>We build the plan, in writing.</div>
-                <div className="a">The support plan, an <b>abuse prevention plan (IAPP)</b> when it applies, medication management, and financial management services when we&apos;re handling finances.</div>
+                <div className="a">The support plan, an abuse prevention plan (IAPP) when it applies, medication management, and financial management services when we&apos;re handling finances.</div>
               </div>
               <div className="askrow">
                 <div className="q"><span className="qn">Step 05</span>You stay as close as you want.</div>
