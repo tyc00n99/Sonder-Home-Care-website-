@@ -59,35 +59,31 @@ export default function FamiliesPage() {
           </div>
 
           <div style={{ marginTop: 88 }} data-reveal>
-            <div className="eyebrow">The Sonder standard</div>
-            <h2 style={{ maxWidth: 680 }}>What working with us actually looks like.</h2>
+            <div className="eyebrow">The intake, step by step</div>
+            <h2 style={{ maxWidth: 680 }}>From first call to first shift, here is exactly what happens.</h2>
             <p className="lede" style={{ marginTop: 14, maxWidth: 640 }}>
-              Every provider promises good care. These are the specifics we put in writing.
+              No mystery and no runaround. This is the actual process, in order.
             </p>
             <div style={{ marginTop: 36 }}>
               <div className="askrow">
-                <div className="q"><span className="qn">01</span>You meet your caregiver first.</div>
-                <div className="a">Before the first shift, not after. If the fit is wrong, <b>we recast before we start</b>.</div>
+                <div className="q"><span className="qn">Step 01</span>We gather the records.</div>
+                <div className="a">With your permission, we request the medical history: the <b>support plan, medical referral, diagnostic documents, wellness checks</b>, and anything else pertinent. If there was a previous provider, we request those records too, to see what&apos;s been working.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">02</span>Experienced hands only.</div>
-                <div className="a">Every DSP has <b>two or more years</b> supporting people with disabilities, and every hire passes a background check. Your family is a strange place to start learning.</div>
+                <div className="q"><span className="qn">Step 02</span>You point us to the case manager.</div>
+                <div className="a">Tell us who they are and which county they&apos;re in. You sign <b>one authorization form</b>, and from there we deal with them directly: the support plan, and how our services get added to it.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">03</span>Your language, spoken here.</div>
-                <div className="a"><b>English, Spanish, Korean, ASL, and Hmong.</b> Care lands better in the language your family speaks at the kitchen table.</div>
+                <div className="q"><span className="qn">Step 03</span>We meet your person.</div>
+                <div className="a">Daughter, son, uncle, grandfather, grandson: whoever you&apos;re the guardian for. We sit down together, figure out what works for your family, and <b>build the schedule around your life</b>, not ours.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">04</span>No waitlist.</div>
-                <div className="a">Our DSP network runs deep, so <b>care starts fast</b> instead of sitting in a queue.</div>
+                <div className="q"><span className="qn">Step 04</span>We build the plan, in writing.</div>
+                <div className="a">The support plan, an <b>abuse prevention plan (IAPP)</b> when it applies, medication management, and financial management services when we&apos;re handling finances.</div>
               </div>
               <div className="askrow">
-                <div className="q"><span className="qn">05</span>Someone answers at 2am.</div>
-                <div className="a"><b>An on-call DSP, every hour of every night.</b> Emergencies don&apos;t keep business hours.</div>
-              </div>
-              <div className="askrow">
-                <div className="q"><span className="qn">06</span>You&apos;ll never chase an update.</div>
-                <div className="a">Every shift documented, progress reports on schedule, incidents reported <b>the way the state requires</b>.</div>
+                <div className="q"><span className="qn">Step 05</span>You stay as close as you want.</div>
+                <div className="a">Updates <b>daily, weekly, or biweekly</b>, matched to how involved you are. Your case manager gets consistent updates too, without you having to relay a thing.</div>
               </div>
             </div>
           </div>
