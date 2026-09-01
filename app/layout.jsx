@@ -8,12 +8,14 @@ const sans = Outfit({ subsets: ['latin'], weight: ['400', '500', '600'], variabl
 const mono = Inconsolata({ subsets: ['latin'], weight: ['500', '600'], variable: '--font-mono', display: 'swap' });
 
 export const metadata = {
+  metadataBase: new URL('https://www.sonderhomecaremn.com'),
   title: {
     default: 'Sonder Homecare',
     template: '%s · Sonder Homecare',
   },
   description:
     'Sonder Homecare is a licensed 245D provider in Minnesota. Our caregivers work in clients’ own homes, family homes, and the community.',
+  alternates: { canonical: './' },
 };
 
 export default function RootLayout({ children }) {
