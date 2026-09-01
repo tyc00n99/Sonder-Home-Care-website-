@@ -362,6 +362,11 @@
   .info-steps .istep .k{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#F5BD8E;margin-bottom:6px}
   .info-steps .istep p{font-size:14px;margin:0;color:#F0EEE6}
 
+  .photo-band{
+    display:block;width:100%;height:clamp(240px,38vw,430px);object-fit:cover;
+    border-radius:22px;margin-top:44px;
+  }
+
   .jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
   .jump a{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream-2);border:1px solid var(--line);border-radius:99px;padding:8px 15px;transition:color .2s,border-color .2s}
   .jump a:hover{color:var(--ink);border-color:rgba(41,36,32,.3)}

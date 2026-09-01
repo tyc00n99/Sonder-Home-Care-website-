@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PageFx from '@/components/PageFx';
+import { bp } from '@/lib/paths';
 
 export const metadata = {
   title: 'For Families',
@@ -22,6 +23,13 @@ export default function FamiliesPage() {
               If you&apos;re here, you&apos;re probably already doing this job: the medications, the overnights, the appointments, the worry. This page covers the two things families ask us most: what it gives you back, and what working with us actually looks like. How it all gets paid for lives on the <Link href="/services#pays" style={{ fontWeight: 600, color: 'var(--copper-deep)' }}>services page</Link>.
             </p>
           </div>
+
+          <img
+            className="photo-band"
+            src={`${bp}/family-kitchen.jpg`}
+            alt="A caregiver and an older woman sitting together at her kitchen table"
+            data-reveal
+          />
 
           <div style={{ marginTop: 72 }} data-reveal>
             <div className="eyebrow">What it gives you back</div>
