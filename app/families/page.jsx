@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PageFx from '@/components/PageFx';
+import IntakeStepper from '@/components/IntakeStepper';
 import { bp } from '@/lib/paths';
 
 export const metadata = {
@@ -16,20 +17,21 @@ export default function FamiliesPage() {
         <div className="wrap">
           <Link className="back-link" href="/">&larr; Back to home</Link>
 
-          <div className="page-head" style={{ maxWidth: 720 }}>
-            <div className="eyebrow">For Families</div>
-            <h2>You&apos;ve been the whole care team. You don&apos;t have to be.</h2>
-            <p className="lede" style={{ marginTop: 16, maxWidth: 620 }}>
-              If you&apos;re here, you&apos;re probably already doing this job: the medications, the overnights, the appointments, the worry. This page covers the two things families ask us most: what it gives you back, and what working with us actually looks like. How it all gets paid for lives on the <Link href="/services#pays" style={{ fontWeight: 600, color: 'var(--copper-deep)' }}>services page</Link>.
-            </p>
+          <div className="fam-head">
+            <div className="page-head" style={{ marginBottom: 0 }}>
+              <div className="eyebrow">For Families</div>
+              <h2>You&apos;ve been the whole care team. You don&apos;t have to be.</h2>
+              <p className="lede" style={{ marginTop: 16, maxWidth: 620 }}>
+                If you&apos;re here, you&apos;re probably already doing this job: the medications, the overnights, the appointments, the worry. This page covers the two things families ask us most: what it gives you back, and what working with us actually looks like. How it all gets paid for lives on the <Link href="/services#pays" style={{ fontWeight: 600, color: 'var(--copper-deep)' }}>services page</Link>.
+              </p>
+            </div>
+            <img
+              className="photo-sq"
+              src={`${bp}/family-kitchen.jpg`}
+              alt="A caregiver and an older woman sitting together at her kitchen table"
+              data-reveal
+            />
           </div>
-
-          <img
-            className="photo-band"
-            src={`${bp}/family-kitchen.jpg`}
-            alt="A caregiver and an older woman sitting together at her kitchen table"
-            data-reveal
-          />
 
           <div style={{ marginTop: 72 }} data-reveal>
             <div className="eyebrow">What it gives you back</div>
@@ -57,28 +59,7 @@ export default function FamiliesPage() {
             <p className="lede" style={{ marginTop: 14, maxWidth: 640 }}>
               No mystery and no runaround. This is the actual process, in order.
             </p>
-            <div style={{ marginTop: 36 }}>
-              <div className="askrow">
-                <div className="q"><span className="qn">Step 01</span>We gather the records.</div>
-                <div className="a">With your permission, we request the medical history: the <b>support plan, medical referral, diagnostic documents, wellness checks</b>, and anything else pertinent. If there was a previous provider, we request those records too, to see what&apos;s been working.</div>
-              </div>
-              <div className="askrow">
-                <div className="q"><span className="qn">Step 02</span>You point us to the case manager.</div>
-                <div className="a">Tell us who they are and which county they&apos;re in. You sign <b>one authorization form</b>, and from there we deal with them directly: the support plan, and how our services get added to it.</div>
-              </div>
-              <div className="askrow">
-                <div className="q"><span className="qn">Step 03</span>We meet your person.</div>
-                <div className="a">Daughter, son, uncle, grandfather, grandson: whoever you&apos;re the guardian for. We sit down together, figure out what works for your family, and <b>build the schedule around your life</b>, not ours.</div>
-              </div>
-              <div className="askrow">
-                <div className="q"><span className="qn">Step 04</span>We build the plan, in writing.</div>
-                <div className="a">The support plan, an abuse prevention plan (IAPP) when it applies, medication management, and financial management services when we&apos;re handling finances.</div>
-              </div>
-              <div className="askrow">
-                <div className="q"><span className="qn">Step 05</span>You stay as close as you want.</div>
-                <div className="a">Updates <b>daily, weekly, or biweekly</b>, matched to how involved you are. Your case manager gets consistent updates too, without you having to relay a thing.</div>
-              </div>
-            </div>
+            <IntakeStepper />
           </div>
 
           <div style={{ marginTop: 88 }} data-reveal>

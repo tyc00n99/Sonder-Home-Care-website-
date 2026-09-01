@@ -362,9 +362,34 @@
   .info-steps .istep .k{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#F5BD8E;margin-bottom:6px}
   .info-steps .istep p{font-size:14px;margin:0;color:#F0EEE6}
 
-  .photo-band{
-    display:block;width:100%;height:clamp(240px,38vw,430px);object-fit:cover;
-    border-radius:22px;margin-top:44px;
+  .fam-head{display:grid;grid-template-columns:1fr auto;gap:clamp(24px,5vw,72px);align-items:center}
+  .photo-sq{width:clamp(220px,26vw,330px);aspect-ratio:1;object-fit:cover;border-radius:22px;display:block}
+
+  /* intake stepper (B2 rail) */
+  .ik-rail{display:grid;grid-template-columns:300px 1fr;gap:clamp(20px,3.5vw,48px);margin-top:36px}
+  .ik-list{display:grid;gap:2px;align-content:start}
+  .ik-item{
+    position:relative;text-align:left;background:none;border:none;cursor:pointer;
+    font-family:var(--sans);padding:13px 14px 13px 24px;border-radius:10px;
+    color:var(--taupe);font-size:14.5px;font-weight:500;transition:color .3s,background .3s;
+  }
+  .ik-item .ik-rn{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe);display:block;margin-bottom:1px}
+  .ik-item::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:3px;border-radius:3px;background:var(--line)}
+  .ik-prog{position:absolute;left:7px;top:10px;bottom:10px;width:3px;border-radius:3px;background:var(--copper);transform-origin:top;animation:ikvfill 5s linear forwards}
+  @keyframes ikvfill{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+  .ik-item.active{color:var(--ink);background:var(--cream-2)}
+  .ik-item.active .ik-rn{color:var(--copper-deep)}
+  .ik-card{background:var(--cream-2);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,3vw,34px);min-height:200px}
+  .ik-inner{animation:ikcardin .55s cubic-bezier(.22,.61,.36,1)}
+  @keyframes ikcardin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .ik-k{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--copper-deep)}
+  .ik-card h4{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.6vw,28px);letter-spacing:-.01em;margin:8px 0 10px}
+  .ik-card p{font-size:15px;color:var(--taupe);max-width:600px}
+  @media (prefers-reduced-motion: reduce){.ik-prog{animation:none;transform:scaleY(1)}.ik-inner{animation:none}}
+  @media (max-width:820px){
+    .fam-head{grid-template-columns:1fr}
+    .photo-sq{width:min(70vw,320px)}
+    .ik-rail{grid-template-columns:1fr}
   }
 
   .jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
