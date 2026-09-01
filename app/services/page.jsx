@@ -12,27 +12,30 @@ export default function ServicesPage() {
   return (
     <main>
       <PageFx />
-      <section className="page-top has-corner-vid" style={{ paddingBottom: 0 }}>
-        <div className="corner-vid" aria-hidden="true">
-          <video data-ambient autoPlay muted loop playsInline poster={`${bp}/services-poster.jpg`}>
-            <source src={`${bp}/services-loop.mp4`} type="video/mp4" />
-          </video>
-        </div>
+      <section className="page-top" style={{ paddingBottom: 0 }}>
         <div className="wrap">
           <Link className="back-link" href="/">&larr; Back to home</Link>
 
-          <div className="page-head" style={{ maxWidth: 720 }}>
-            <div className="eyebrow">Services</div>
-            <h2>Everyday help, so home stays home.</h2>
-            <p className="lede" style={{ marginTop: 16, maxWidth: 600 }}>
-              Meals, medications, overnights, a safe clean house. When that daily work gets too heavy for a family to carry alone, we carry it with you. Here is each service, in plain words.
-            </p>
-            <div className="jump">
-              <a href="#ihs">Home Supports</a>
-              <a href="#nights">Night Supervision</a>
-              <a href="#respite">Respite</a>
-              <a href="#homemaker">Homemaker</a>
-              <a href="#pays">Payment</a>
+          <div className="svc-head-grid">
+            <div className="page-head" style={{ marginBottom: 0 }}>
+              <div className="eyebrow">Services</div>
+              <h2>Everyday help, so home stays home.</h2>
+              <p className="lede" style={{ marginTop: 16, maxWidth: 600 }}>
+                Meals, medications, overnights, a safe clean house. When that daily work gets too heavy for a family to carry alone, we carry it with you. Here is each service, in plain words.
+              </p>
+              <div className="jump">
+                <a href="#ihs">Home Supports</a>
+                <a href="#nights">Night Supervision</a>
+                <a href="#respite">Respite</a>
+                <a href="#homemaker">Homemaker</a>
+                <a href="#pays">Payment</a>
+              </div>
+            </div>
+            <div className="vidcard" data-reveal style={{ '--d': '.12s' }}>
+              <video data-ambient autoPlay muted loop playsInline poster={`${bp}/services-poster.jpg`}>
+                <source src={`${bp}/services-loop.mp4`} type="video/mp4" />
+              </video>
+              <span className="cap">Support that comes to you</span>
             </div>
           </div>
 
