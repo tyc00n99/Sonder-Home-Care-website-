@@ -40,8 +40,12 @@ export default function PageFx() {
     );
     document.querySelectorAll('[data-count]').forEach((el) => cio.observe(el));
 
-    const v = document.getElementById('heroVid');
-    if (v && reduced) { v.removeAttribute('autoplay'); v.pause(); }
+    if (reduced) {
+      document.querySelectorAll('#heroVid, video[data-ambient]').forEach((v) => {
+        v.removeAttribute('autoplay');
+        v.pause();
+      });
+    }
 
     return () => { io.disconnect(); cio.disconnect(); };
   }, []);

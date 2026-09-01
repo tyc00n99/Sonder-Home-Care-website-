@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PageFx from '@/components/PageFx';
+import { bp } from '@/lib/paths';
 
 export const metadata = {
   title: 'Services',
@@ -11,7 +12,12 @@ export default function ServicesPage() {
   return (
     <main>
       <PageFx />
-      <section className="page-top" style={{ paddingBottom: 0 }}>
+      <section className="page-top has-corner-vid" style={{ paddingBottom: 0 }}>
+        <div className="corner-vid" aria-hidden="true">
+          <video data-ambient autoPlay muted loop playsInline poster={`${bp}/services-poster.jpg`}>
+            <source src={`${bp}/services-loop.mp4`} type="video/mp4" />
+          </video>
+        </div>
         <div className="wrap">
           <Link className="back-link" href="/">&larr; Back to home</Link>
 
