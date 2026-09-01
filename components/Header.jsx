@@ -36,7 +36,7 @@ export default function Header() {
           </div>
           <Link className="brand" href="/">Sonder Homecare</Link>
           <div className="nav-right">
-            <Link className="btn btn-copper nav-cta-desktop" href="/#contact">Refer a client</Link>
+            <Link className="btn btn-copper nav-cta-desktop" href="/professionals#refer">Refer a client</Link>
             <button className="burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
               <span></span>
             </button>
@@ -49,7 +49,7 @@ export default function Header() {
           <Link href="/professionals" onClick={close}>For Professionals</Link>
           <Link href="/faq" onClick={close}>FAQ</Link>
           <Link href="/careers" onClick={close}>Careers</Link>
-          <Link href="/#contact" onClick={close}><strong>Refer a client &rarr;</strong></Link>
+          <Link href="/professionals#refer" onClick={close}><strong>Refer a client &rarr;</strong></Link>
         </div>
       </nav>
     </div>

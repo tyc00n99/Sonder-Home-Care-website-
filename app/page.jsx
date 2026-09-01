@@ -36,7 +36,7 @@ export default function Home() {
                 Sonder Homecare is a <span className="lic">licensed 245D provider</span> in Minnesota. Our caregivers work in clients&apos; own homes, family homes, and the community, with support plans built around each person.
               </p>
               <div className="hero-ctas" data-reveal style={{ '--d': '.16s' }}>
-                <Link className="btn btn-copper" href="/#contact">Refer a client <span className="arr">&rarr;</span></Link>
+                <Link className="btn btn-copper" href="/professionals#refer">Refer a client <span className="arr">&rarr;</span></Link>
                 <Link className="btn btn-dark" href="/#about">Talk to our team</Link>
               </div>
               <div className="trust-row" data-reveal style={{ '--d': '.24s' }}>
@@ -126,7 +126,7 @@ export default function Home() {
                 <li>IHS, respite, night supervision, and homemaker services</li>
                 <li>245D documentation, progress reports, incident reporting</li>
               </ul>
-              <Link className="aud-link" href="/#contact">Start a referral <span className="arr">&rarr;</span></Link>
+              <Link className="aud-link" href="/professionals#refer">Start a referral <span className="arr">&rarr;</span></Link>
             </div>
             <div className="aud-card" data-reveal style={{ '--d': '.24s' }} id="professionals">
               <div className="glyph" aria-hidden="true">
@@ -139,7 +139,7 @@ export default function Home() {
                 <li>Night supervision for higher-risk transitions home</li>
                 <li>Ongoing collaboration with the care team</li>
               </ul>
-              <Link className="aud-link" href="/#contact">Partner with us <span className="arr">&rarr;</span></Link>
+              <Link className="aud-link" href="/professionals#refer">Partner with us <span className="arr">&rarr;</span></Link>
             </div>
           </div>
         </div>
