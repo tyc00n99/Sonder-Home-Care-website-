@@ -1,0 +1,487 @@
+<meta charset="utf-8">
+<title>Sonder HomeCare — 245D Home &amp; Community-Based Services in Minnesota</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Sonder HomeCare is a 245D-licensed agency in Minnesota providing basic and in-home support services: respite care, adult companion services, night supervision, individualized home supports, semi-independent living skills, and 24-hour emergency assistance.">
+<style>
+  /* ---------- starling palettes (switchable) ----------
+     Drawn from European starling plumage: iridescent green,
+     petrol blue, violet sheen — flecked with gold-cream speckles. */
+  :root, :root[data-palette="verdigris"]{
+    --page:#FAF9F5;
+    --card:#FFFFFF;
+    --ink:#1B2420;
+    --ink-soft:#57635C;
+    --accent:#3B7367;      /* iridescent teal-green of the wing */
+    --accent-ink:#2F6055;
+    --deep:#16211E;        /* green-black body */
+    --deep-soft:rgba(250,249,245,.72);
+    --tint:#EEF2EE;
+    --line:#E2E6E0;
+    --pop:#D9A73E;         /* gold speckle */
+    --pop-strong:#C89426;
+    --pop-text:#2A2208;
+    --pop-soft:rgba(217,167,62,.16);
+  }
+  :root[data-palette="petrol"]{
+    --page:#F9FAFA;
+    --card:#FFFFFF;
+    --ink:#1A2428;
+    --ink-soft:#53646B;
+    --accent:#33697A;      /* petrol blue of the neck at dusk */
+    --accent-ink:#2A5766;
+    --deep:#132025;
+    --deep-soft:rgba(249,250,250,.72);
+    --tint:#ECF1F2;
+    --line:#DFE5E6;
+    --pop:#C98A3B;         /* copper-bronze sheen */
+    --pop-strong:#B67827;
+    --pop-text:#2A1D08;
+    --pop-soft:rgba(201,138,59,.16);
+  }
+  :root[data-palette="plum"]{
+    --page:#FAF9F7;
+    --card:#FFFFFF;
+    --ink:#241F28;
+    --ink-soft:#5F5866;
+    --accent:#655377;      /* violet sheen across the back */
+    --accent-ink:#544463;
+    --deep:#1D1822;
+    --deep-soft:rgba(250,249,247,.72);
+    --tint:#F0EEF2;
+    --line:#E4E1E7;
+    --pop:#D9A73E;         /* gold speckle */
+    --pop-strong:#C89426;
+    --pop-text:#2A2208;
+    --pop-soft:rgba(217,167,62,.16);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--page);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:16.5px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:"Charter","Iowan Old Style","Palatino Linotype",Georgia,serif}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent-ink);text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+  h1,h2,h3{letter-spacing:-.02em;font-weight:650}
+
+  .eyebrow{
+    font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent-ink);margin:0 0 20px;
+  }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-block;padding:13px 26px;border-radius:10px;
+    font-weight:600;font-size:15.5px;line-height:1.2;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{text-decoration:none}
+  .btn-dark{background:var(--ink);color:var(--page)}
+  .btn-dark:hover{background:var(--deep)}
+  .btn-pop{background:var(--pop);color:var(--pop-text)}
+  .btn-pop:hover{background:var(--pop-strong)}
+  .btn-quiet{border:1px solid var(--line);color:var(--ink);background:var(--card)}
+  .btn-quiet:hover{border-color:var(--ink-soft)}
+  .btn-light{background:var(--page);color:var(--ink)}
+  .btn-light:hover{background:var(--tint)}
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb, var(--page) 90%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:28px;padding:15px 0}
+  .brand{display:flex;align-items:center;gap:10px;color:var(--ink)}
+  .brand-name{font-weight:700;font-size:18px;letter-spacing:.02em;line-height:1.1}
+  .brand-name small{
+    display:block;font-weight:600;font-size:10px;letter-spacing:.32em;color:var(--accent-ink);
+  }
+  .nav-links{display:flex;gap:26px;margin-left:auto;align-items:center}
+  .nav-links a{color:var(--ink-soft);font-weight:500;font-size:15px}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links .btn{padding:10px 20px;font-size:14.5px}
+  .nav-links a.btn-pop,.nav-links a.btn-pop:hover{color:var(--pop-text)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:96px 0 76px}
+  .hero-word{
+    font-size:clamp(48px,7.5vw,84px);line-height:1;margin:0;font-weight:650;
+  }
+  .hero-word .pos{
+    font-size:clamp(18px,2.4vw,24px);font-weight:400;font-style:italic;
+    color:var(--ink-soft);margin-left:14px;letter-spacing:0;
+  }
+  .hero-def{
+    font-size:clamp(20px,2.7vw,26px);line-height:1.5;
+    max-width:24em;margin:28px 0 0;color:var(--ink);font-weight:400;
+  }
+  .hero-def em{
+    color:var(--ink);font-style:normal;
+    background:linear-gradient(transparent 62%, var(--pop-soft) 62%);
+    box-shadow:inset 0 -2px 0 var(--pop);
+  }
+  .hero-kicker{margin:26px 0 0;font-size:17px;max-width:36em;color:var(--ink-soft)}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+  .hero-facts{
+    display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:56px;
+    padding-top:24px;border-top:1px solid var(--line);
+    font-size:14px;font-weight:500;color:var(--ink-soft);
+  }
+  .hero-facts span{display:flex;align-items:center;gap:9px}
+  .hero-facts svg{flex:none}
+
+  .reveal{opacity:0;transform:translateY(12px);animation:rise .7s ease forwards}
+  .reveal.d1{animation-delay:.08s}.reveal.d2{animation-delay:.18s}
+  .reveal.d3{animation-delay:.3s}.reveal.d4{animation-delay:.42s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{animation:none;opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:80px 0}
+  .section-head{max-width:640px;margin-bottom:48px}
+  .section-head h2{font-size:clamp(28px,4vw,38px);line-height:1.12;margin:0 0 14px}
+  .section-head p{margin:0;color:var(--ink-soft);font-size:17px}
+
+  /* services */
+  .services{border-top:1px solid var(--line)}
+  .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .svc-col{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:32px 32px 16px;
+  }
+  .svc-col .cat{
+    font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--accent-ink);margin:0 0 10px;
+  }
+  .svc-col h3{margin:0 0 6px;font-size:22px}
+  .svc-col .svc-note{color:var(--ink-soft);font-size:14.5px;margin:0 0 8px}
+  .svc-col ul{list-style:none;margin:16px 0 0;padding:0}
+  .svc-col li{padding:15px 0;border-top:1px solid var(--line)}
+  .svc-col li strong{display:block;font-size:16px;font-weight:600;margin-bottom:2px}
+  .svc-col li span{color:var(--ink-soft);font-size:14.5px;line-height:1.55}
+
+  /* steps */
+  .steps{background:var(--tint)}
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px}
+  .step .n{
+    font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent-ink);display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  }
+  .step .n::after{content:"";height:2px;flex:1;background:linear-gradient(90deg,var(--pop) 28px,var(--line) 28px)}
+  .step h3{margin:0 0 8px;font-size:19px}
+  .step p{margin:0;color:var(--ink-soft);font-size:15px}
+
+  /* why band — faint speckles, like a starling's breast */
+  .band{
+    background-color:var(--deep);
+    background-image:
+      radial-gradient(rgba(250,249,245,.07) 1px, transparent 1.4px),
+      radial-gradient(rgba(250,249,245,.05) 1px, transparent 1.4px);
+    background-size:34px 34px, 52px 52px;
+    background-position:0 0, 17px 26px;
+    color:var(--page);
+  }
+  .band .eyebrow{color:color-mix(in srgb, var(--page) 65%, var(--accent))}
+  .band .section-head h2{color:var(--page)}
+  .band .section-head p{color:var(--deep-soft)}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .why h3{margin:0 0 8px;font-size:17.5px;color:var(--page);display:flex;gap:10px;align-items:center;font-weight:600}
+  .why p{margin:0;font-size:14.8px;color:var(--deep-soft)}
+  .why svg{flex:none;color:var(--pop)}
+
+  /* contact */
+  .contact-card{
+    display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:20px;padding:52px;
+  }
+  .contact-card h2{font-size:clamp(26px,3.6vw,34px);margin:0 0 12px;line-height:1.12}
+  .contact-card>div>p{color:var(--ink-soft);margin:0 0 26px}
+  .contact-side{display:flex;flex-direction:column;gap:12px}
+  .contact-line{
+    display:flex;gap:13px;align-items:flex-start;background:var(--page);
+    border:1px solid var(--line);padding:14px 17px;border-radius:12px;font-size:15px;
+  }
+  .contact-line svg{flex:none;margin-top:3px}
+  .contact-line b{
+    display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:600;margin-bottom:2px;
+  }
+
+  footer.site{
+    background-color:var(--deep);
+    background-image:radial-gradient(rgba(250,249,245,.06) 1px, transparent 1.4px);
+    background-size:38px 38px;
+    color:var(--deep-soft);
+    padding:34px 0 44px;font-size:14px;
+  }
+  .foot{display:flex;flex-wrap:wrap;gap:12px 30px;align-items:center;justify-content:space-between}
+  .foot b{color:var(--page);font-weight:600}
+
+  /* ---------- palette switcher ---------- */
+  .swatches{
+    position:fixed;bottom:20px;right:20px;z-index:90;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:11px 15px;box-shadow:0 6px 24px rgba(20,25,35,.12);
+    display:flex;align-items:center;gap:10px;
+  }
+  .swatches .lbl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+  .sw{width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;display:block}
+  .sw.verdigris{background:linear-gradient(135deg,#16211E 45%,#3B7367 45% 78%,#D9A73E 78%)}
+  .sw.petrol{background:linear-gradient(135deg,#132025 45%,#33697A 45% 78%,#C98A3B 78%)}
+  .sw.plum{background:linear-gradient(135deg,#1D1822 45%,#655377 45% 78%,#D9A73E 78%)}
+  .sw[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--card) inset}
+
+  @media (max-width:840px){
+    .svc-grid,.steps-grid,.why-grid{grid-template-columns:1fr}
+    .contact-card{grid-template-columns:1fr;padding:32px 26px}
+    .nav-links a:not(.btn){display:none}
+    .hero{padding:64px 0 56px}
+    section{padding:60px 0}
+    .swatches{bottom:14px;right:14px;padding:9px 12px}
+  }
+</style>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Sonder HomeCare home">
+      <svg width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M9 21c0-4.4 3.6-8 8-8 2.5 0 4.7 1.1 6.2 2.9" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M9 21c0 3 1.8 5 4.4 7.2L24 36l10.6-7.8C37.2 26 39 24 39 21c0-4.4-3.6-8-8-8-2.6 0-4.9 1.2-6.4 3.1" stroke="var(--ink)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M24 24v14" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">SONDER<small>HOMECARE</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#why">Why Sonder</a>
+      <a class="btn btn-pop" href="#contact">Request care</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">In-Home Services · 245D Licensed · Minnesota</p>
+      <h1 class="serif hero-word reveal d1">son·der <span class="pos">noun</span></h1>
+      <p class="serif hero-def reveal d2">
+        The realization that every person you meet is living a life as vivid
+        and complex as your own. <em>It's the reason we exist, and the standard
+        we bring into your home.</em>
+      </p>
+      <p class="hero-kicker reveal d3">
+        Sonder HomeCare provides 245D basic and in-home support services across
+        Minnesota, built around each person's own goals, routines, and idea of a good day.
+      </p>
+      <div class="hero-ctas reveal d3">
+        <a class="btn btn-pop" href="#contact">Request care for a loved one</a>
+        <a class="btn btn-quiet" href="#contact">Refer a client</a>
+      </div>
+      <div class="hero-facts reveal d4">
+        <span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5l2 4 4.4.6-3.2 3.1.8 4.3L8 11.4l-3.9 2.1.7-4.3L1.6 6.1 6 5.5l2-4z" stroke="var(--accent-ink)" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          Licensed under MN DHS 245D
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="var(--accent-ink)" stroke-width="1.4"/><path d="M8 4.5V8l2.5 1.5" stroke="var(--accent-ink)" stroke-width="1.4" stroke-linecap="round"/></svg>
+          24-hour emergency assistance
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5L8 3l5.5 5.5M4 7.5V13h8V7.5" stroke="var(--accent-ink)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Care in home and community
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Our services</p>
+        <h2>Everything under our 245D license</h2>
+        <p>
+          Listed the way your case manager or support plan names them,
+          with what each one actually means for your family.
+        </p>
+      </div>
+
+      <div class="svc-grid">
+        <div class="svc-col">
+          <p class="cat">License category 1</p>
+          <h3>Basic Support Services</h3>
+          <p class="svc-note">Day-to-day support that keeps life at home safe and steady.</p>
+          <ul>
+            <li><strong>24-hour emergency assistance</strong>
+                <span>Someone to call and a plan that responds, any hour, any day.</span></li>
+            <li><strong>Adult companion services</strong>
+                <span>Company for meals, errands, hobbies, and time in the community.</span></li>
+            <li><strong>Homemaker</strong>
+                <span>Help keeping the household running: cleaning, laundry, meal prep.</span></li>
+            <li><strong>Night supervision</strong>
+                <span>Overnight staff in the home so everyone can actually sleep.</span></li>
+            <li><strong>Respite care</strong>
+                <span>Short-term relief for family caregivers, in home or out of home.</span></li>
+            <li><strong>Individual community living support</strong>
+                <span>Support for older adults to keep living in their own home.</span></li>
+            <li><strong>Individualized home supports</strong>
+                <span>Help with daily living in the person's own home, on their terms.</span></li>
+          </ul>
+        </div>
+
+        <div class="svc-col">
+          <p class="cat">License category 2</p>
+          <h3>In-Home Support Services</h3>
+          <p class="svc-note">Skill-building services that grow independence over time.</p>
+          <ul>
+            <li><strong>Semi-independent living skills</strong>
+                <span>Practicing budgeting, cooking, transportation, and self-advocacy toward more independent living.</span></li>
+            <li><strong>Individualized home supports with training</strong>
+                <span>Daily-living support plus structured teaching of new skills, tracked against the person's own goals.</span></li>
+            <li><strong>Individualized home supports with family training</strong>
+                <span>The same skill-building, with the family trained alongside so progress holds between visits.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="steps" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Getting started</p>
+        <h2>From first call to first visit</h2>
+        <p>Whether you're a parent, a guardian, or a county case manager, the path in is the same three steps.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="n">Step one</div>
+          <h3>Talk with us</h3>
+          <p>Tell us about the person who needs support, the services in their plan, and what a good week looks like for them. No forms required to start the conversation.</p>
+        </div>
+        <div class="step">
+          <div class="n">Step two</div>
+          <h3>Build the support plan</h3>
+          <p>We meet the person and their team, confirm services and authorization with the county, and write a plan around their goals, not a template.</p>
+        </div>
+        <div class="step">
+          <div class="n">Step three</div>
+          <h3>Start care at home</h3>
+          <p>Matched staff begin visits on a schedule that fits the household. We review progress with you and adjust as life changes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY ============ -->
+  <section class="band" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why Sonder</p>
+        <h2>The name is a promise</h2>
+        <p>Every client is a whole person, not a service line. Here's what that looks like in practice.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why">
+          <h3>
+            <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 17s-6.5-4-6.5-8.5A3.8 3.8 0 0110 6a3.8 3.8 0 016.5 2.5C16.5 13 10 17 10 17z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Person-centered, for real
+          </h3>
+          <p>Plans start with the person's own goals and routines. Staff are matched for fit, not just availability, and stay consistent so trust can build.</p>
+        </div>
+        <div class="why">
+          <h3>
+            <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10.5l4.5 4.5L17 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Easy to work with
+          </h3>
+          <p>Clear communication with families and county teams, documentation done right, and a direct line to a human when something changes.</p>
+        </div>
+        <div class="why">
+          <h3>
+            <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.6"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            There when it matters
+          </h3>
+          <p>24-hour emergency assistance and overnight supervision mean support doesn't end at 5 pm, and neither do we.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Let's talk about the person you care about.</h2>
+          <p>
+            Call or write and tell us who they are. We'll explain how 245D services
+            work, what's covered in their support plan, and how quickly care can start.
+          </p>
+          <a class="btn btn-pop" href="tel:+17635550134">Call Sonder HomeCare</a>
+        </div>
+        <div class="contact-side">
+          <div class="contact-line">
+            <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 3h3l1.5 4-2 1.5a11 11 0 004 4L11 10.5l4 1.5v3a1.5 1.5 0 01-1.6 1.5C6.6 16 2 11.4 1.5 4.6A1.5 1.5 0 013 3z" stroke="var(--accent-ink)" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <div><b>Phone</b>(763) 555-0134</div>
+          </div>
+          <div class="contact-line">
+            <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="4" width="14" height="11" rx="2" stroke="var(--accent-ink)" stroke-width="1.5"/><path d="M3 5.5L9 10l6-4.5" stroke="var(--accent-ink)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div><b>Email</b>care@sonderhomecare.com</div>
+          </div>
+          <div class="contact-line">
+            <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 16s5.5-4.6 5.5-8.5a5.5 5.5 0 10-11 0C3.5 11.4 9 16 9 16z" stroke="var(--accent-ink)" stroke-width="1.5"/><circle cx="9" cy="7.5" r="2" stroke="var(--accent-ink)" stroke-width="1.5"/></svg>
+            <div><b>Serving</b>Twin Cities metro &amp; greater Minnesota</div>
+          </div>
+          <div class="contact-line">
+            <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="13" height="12" rx="2" stroke="var(--accent-ink)" stroke-width="1.5"/><path d="M2.5 7.5h13M6 2v3M12 2v3" stroke="var(--accent-ink)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div><b>Case managers</b>Referrals welcome — we respond within one business day</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot">
+    <span><b>Sonder HomeCare</b> · Licensed by the Minnesota Department of Human Services under Chapter 245D.</span>
+    <span>Where every life is seen.</span>
+  </div>
+</footer>
+
+<div class="swatches" role="group" aria-label="Try a starling palette">
+  <span class="lbl">Palette</span>
+  <button class="sw verdigris" aria-pressed="true" data-p="verdigris" title="Verdigris — iridescent teal-green + gold speckle" aria-label="Verdigris palette"></button>
+  <button class="sw petrol" aria-pressed="false" data-p="petrol" title="Petrol — dusk blue + copper sheen" aria-label="Petrol palette"></button>
+  <button class="sw plum" aria-pressed="false" data-p="plum" title="Plum — violet sheen + gold speckle" aria-label="Plum palette"></button>
+</div>
+
+<script>
+  document.querySelectorAll('.sw').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.documentElement.setAttribute('data-palette', btn.dataset.p);
+      document.querySelectorAll('.sw').forEach(function(b){
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+    });
+  });
+</script>

@@ -1,0 +1,959 @@
+<title>Sonder Care Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+:root{
+  --page:#F6F8F7; --card:#FFFFFF; --card-2:#FBFCFB;
+  --ink:#1B2622; --soft:#5A6A66; --faint:#8A9894;
+  --line:#DFE6E3; --line-soft:#EAEFEC;
+  --accent:#2F6357; --accent-ink:#264F46; --accent-tint:#E8F0ED;
+  --teal:#33697A; --teal-tint:#E9F0F2;
+  --amber:#B67827; --amber-tint:#F7EEDF; --amber-ink:#7A5013;
+  --red:#A4432F; --red-tint:#F6E9E5; --red-ink:#7E3221;
+  --good:#3B7367; --good-tint:#E7F0ED;
+  --shadow:0 1px 2px rgba(27,38,34,.05),0 4px 16px rgba(27,38,34,.05);
+  --shadow-lg:0 8px 40px rgba(27,38,34,.16);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#111917; --card:#1A2421; --card-2:#161F1C;
+    --ink:#E6EDEA; --soft:#9CACA6; --faint:#6E7E79;
+    --line:#2A3733; --line-soft:#233029;
+    --accent:#6FB3A2; --accent-ink:#8FC9BA; --accent-tint:#1E322C;
+    --teal:#6FA8BA; --teal-tint:#1D2E33;
+    --amber:#D9A850; --amber-tint:#332916; --amber-ink:#E4BC74;
+    --red:#D0735C; --red-tint:#37211B; --red-ink:#DE9481;
+    --good:#6FB3A2; --good-tint:#1E322C;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+    --shadow-lg:0 8px 40px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --page:#111917; --card:#1A2421; --card-2:#161F1C;
+  --ink:#E6EDEA; --soft:#9CACA6; --faint:#6E7E79;
+  --line:#2A3733; --line-soft:#233029;
+  --accent:#6FB3A2; --accent-ink:#8FC9BA; --accent-tint:#1E322C;
+  --teal:#6FA8BA; --teal-tint:#1D2E33;
+  --amber:#D9A850; --amber-tint:#332916; --amber-ink:#E4BC74;
+  --red:#D0735C; --red-tint:#37211B; --red-ink:#DE9481;
+  --good:#6FB3A2; --good-tint:#1E322C;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--page); color:var(--ink);
+  font-family:"Instrument Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:14.5px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.serif{font-family:"Charter","Iowan Old Style","Palatino Linotype",Georgia,serif}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select,textarea{font:inherit;color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+/* ---------- shell ---------- */
+.app{display:flex;min-height:100vh}
+.side{
+  width:228px;flex:0 0 228px;position:sticky;top:0;height:100vh;
+  border-right:1px solid var(--line);background:var(--card-2);
+  display:flex;flex-direction:column;padding:22px 14px 18px;
+}
+.wordmark{padding:0 10px 4px}
+.wordmark .wm-name{font-family:"Charter","Iowan Old Style",Georgia,serif;font-size:21px;letter-spacing:.01em}
+.wordmark .wm-sub{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--soft);margin-top:1px}
+.nav{margin-top:26px;display:flex;flex-direction:column;gap:2px}
+.nav button{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  padding:8px 10px;border-radius:8px;color:var(--soft);font-weight:500;font-size:14px;
+}
+.nav button:hover{background:var(--line-soft);color:var(--ink)}
+.nav button.on{background:var(--accent-tint);color:var(--accent-ink);font-weight:600}
+.nav svg{width:17px;height:17px;flex:0 0 17px}
+.nav .count{margin-left:auto;font-size:11.5px;font-variant-numeric:tabular-nums;color:var(--faint)}
+.nav button.on .count{color:var(--accent-ink)}
+.side-foot{margin-top:auto;padding:12px 10px 0;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.55}
+.side-foot b{color:var(--soft);font-weight:600}
+
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;
+  padding:14px 28px;background:color-mix(in srgb,var(--page) 88%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+}
+.search{
+  flex:1;max-width:420px;display:flex;align-items:center;gap:8px;
+  background:var(--card);border:1px solid var(--line);border-radius:9px;padding:7px 12px;color:var(--faint);
+}
+.search input{border:0;background:none;outline:none;flex:1;font-size:14px}
+.search input::placeholder{color:var(--faint)}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:9px;
+  font-weight:600;font-size:13.5px;border:1px solid var(--line);background:var(--card);
+}
+.btn:hover{border-color:var(--faint)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0E1613}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0E1613}}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.sm{padding:5px 10px;font-size:12.5px;border-radius:7px}
+.btn.danger{color:var(--red)}
+
+.content{padding:26px 28px 60px;max-width:1180px;width:100%;margin:0 auto}
+.page-h{display:flex;align-items:baseline;gap:14px;margin-bottom:4px;flex-wrap:wrap}
+.page-h h1{font-family:"Charter","Iowan Old Style",Georgia,serif;font-size:26px;font-weight:600;letter-spacing:.005em;text-wrap:balance}
+.page-h .stat-ref{font-size:12px;color:var(--faint)}
+.page-sub{color:var(--soft);margin-bottom:22px;max-width:64ch}
+
+/* ---------- cards / tables ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.card .card-h{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line-soft)}
+.card .card-h h3{font-size:13px;text-transform:uppercase;letter-spacing:.09em;font-weight:600;color:var(--soft)}
+.card .card-h .spacer{flex:1}
+.card .card-b{padding:16px 18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:980px){.g3,.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+td{padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr.rowlink{cursor:pointer}
+tr.rowlink:hover td{background:var(--line-soft)}
+td .who{font-weight:600}
+td .sub{font-size:12px;color:var(--soft)}
+.num{font-variant-numeric:tabular-nums}
+.table-wrap{overflow-x:auto}
+
+/* ---------- pills / status ---------- */
+.pill{display:inline-flex;align-items:center;gap:5px;padding:2.5px 9px;border-radius:99px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.pill .dot{width:6px;height:6px;border-radius:99px;background:currentColor}
+.p-good{background:var(--good-tint);color:var(--good)}
+.p-warn{background:var(--amber-tint);color:var(--amber-ink)}
+.p-bad{background:var(--red-tint);color:var(--red-ink)}
+.p-mut{background:var(--line-soft);color:var(--soft)}
+.p-teal{background:var(--teal-tint);color:var(--teal)}
+
+/* ---------- dashboard ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+@media(max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;box-shadow:var(--shadow)}
+.kpi .k-label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);font-weight:600}
+.kpi .k-val{font-family:"Charter","Iowan Old Style",Georgia,serif;font-size:30px;line-height:1.15;margin-top:5px;font-variant-numeric:tabular-nums}
+.kpi .k-sub{font-size:12px;color:var(--soft);margin-top:2px}
+.kpi.alert .k-val{color:var(--red)}
+.kpi.watch .k-val{color:var(--amber-ink)}
+.alert-row{display:flex;align-items:flex-start;gap:11px;padding:11px 18px;border-bottom:1px solid var(--line-soft);cursor:pointer}
+.alert-row:hover{background:var(--line-soft)}
+.alert-row:last-child{border-bottom:0}
+.alert-row .a-dot{width:8px;height:8px;border-radius:99px;margin-top:6px;flex:0 0 8px}
+.alert-row .a-body{flex:1;min-width:0}
+.alert-row .a-title{font-weight:600;font-size:13.5px}
+.alert-row .a-sub{font-size:12.5px;color:var(--soft)}
+.alert-row .a-when{font-size:12px;color:var(--faint);white-space:nowrap;font-variant-numeric:tabular-nums}
+.empty{padding:26px 18px;text-align:center;color:var(--faint);font-size:13.5px}
+
+/* ---------- list pages ---------- */
+.list-tools{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.chipset{display:flex;gap:6px;flex-wrap:wrap}
+.chip{padding:5px 12px;border-radius:99px;border:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--soft);background:var(--card)}
+.chip.on{background:var(--accent-tint);border-color:transparent;color:var(--accent-ink);font-weight:600}
+
+/* ---------- detail ---------- */
+.crumb{font-size:13px;color:var(--soft);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.crumb button{color:var(--accent-ink);font-weight:600}
+.crumb button:hover{text-decoration:underline}
+.det-head{display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.avatar{width:52px;height:52px;border-radius:12px;background:var(--accent-tint);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;font-family:"Charter",Georgia,serif}
+.avatar.client{background:var(--teal-tint);color:var(--teal)}
+.det-head h1{font-family:"Charter","Iowan Old Style",Georgia,serif;font-size:24px;font-weight:600}
+.det-head .d-sub{color:var(--soft);font-size:13.5px}
+.det-head .d-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:20px;overflow-x:auto}
+.tabs button{padding:9px 14px;font-weight:600;font-size:13.5px;color:var(--soft);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs button:hover{color:var(--ink)}
+.tabs button.on{color:var(--accent-ink);border-bottom-color:var(--accent)}
+.tabs .t-badge{display:inline-block;margin-left:6px;font-size:10.5px;background:var(--red-tint);color:var(--red-ink);border-radius:99px;padding:1px 6px;font-variant-numeric:tabular-nums}
+
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+@media(max-width:700px){.fields{grid-template-columns:1fr}}
+.field{padding:9px 0;border-bottom:1px solid var(--line-soft)}
+.field .f-label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--faint);font-weight:600}
+.field .f-val{margin-top:2px;font-size:14px}
+.field .f-val.missing{color:var(--red);font-style:italic}
+
+/* ---------- doc checklist ---------- */
+.doc-row{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid var(--line-soft)}
+.doc-row:last-child{border-bottom:0}
+.doc-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:0 0 34px}
+.doc-ic.got{background:var(--good-tint);color:var(--good)}
+.doc-ic.miss{background:var(--red-tint);color:var(--red)}
+.doc-ic.exp{background:var(--amber-tint);color:var(--amber-ink)}
+.doc-ic svg{width:16px;height:16px}
+.doc-body{flex:1;min-width:0}
+.doc-name{font-weight:600;font-size:13.5px}
+.doc-meta{font-size:12px;color:var(--soft)}
+.doc-req{font-size:10.5px;color:var(--faint)}
+
+/* ---------- timeline / notes ---------- */
+.note{padding:12px 0;border-bottom:1px solid var(--line-soft)}
+.note:last-child{border-bottom:0}
+.note .n-head{display:flex;gap:8px;align-items:baseline;font-size:12.5px;color:var(--soft);margin-bottom:3px}
+.note .n-head b{color:var(--ink);font-weight:600}
+.note .n-text{font-size:13.5px;white-space:pre-wrap}
+
+/* ---------- compliance matrix ---------- */
+.mx-cell{display:inline-flex;width:22px;height:22px;border-radius:6px;align-items:center;justify-content:center}
+.mx-cell svg{width:12px;height:12px}
+.mx-got{background:var(--good-tint);color:var(--good)}
+.mx-miss{background:var(--red-tint);color:var(--red)}
+.mx-exp{background:var(--amber-tint);color:var(--amber-ink)}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--soft);align-items:center;flex-wrap:wrap}
+.legend .mx-cell{width:16px;height:16px;border-radius:4px}
+
+/* ---------- modal / forms ---------- */
+.scrim{position:fixed;inset:0;background:rgba(14,20,18,.45);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px 16px;overflow-y:auto}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);width:100%;max-width:560px}
+.modal .m-h{display:flex;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line-soft)}
+.modal .m-h h2{font-family:"Charter",Georgia,serif;font-size:18px;font-weight:600}
+.modal .m-h button{margin-left:auto;color:var(--faint);font-size:20px;line-height:1}
+.modal .m-b{padding:18px 20px;display:grid;gap:13px}
+.modal .m-f{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid var(--line-soft)}
+.fg{display:grid;gap:4px}
+.fg label{font-size:12px;font-weight:600;color:var(--soft)}
+.fg input,.fg select,.fg textarea{background:var(--card-2);border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:14px;width:100%}
+.fg textarea{min-height:80px;resize:vertical}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+@media(max-width:520px){.frow{grid-template-columns:1fr}}
+.hint{font-size:11.5px;color:var(--faint)}
+
+/* ---------- toast ---------- */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--page);padding:10px 18px;border-radius:10px;font-weight:600;font-size:13.5px;box-shadow:var(--shadow-lg);z-index:99;opacity:0;transition:opacity .18s, transform .18s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+
+.mt{margin-top:16px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+@media(max-width:840px){
+  .side{width:64px;flex-basis:64px;padding:18px 8px}
+  .wordmark .wm-name{font-size:15px;text-align:center}
+  .wordmark .wm-sub,.nav button span.lbl,.nav .count,.side-foot{display:none}
+  .nav button{justify-content:center}
+  .content{padding:20px 16px 60px}
+}
+</style>
+
+<div class="app" id="app"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= icons ================= */
+const I = {
+  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>',
+  staff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.7-3.4 3.4-5.5 6.5-5.5s5.8 2.1 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14.6c2.6.3 4.4 2 5 5.4"/></svg>',
+  client:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-9.4-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.4 12c-1.9 4.4-9.4 9-9.4 9Z"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.6 3 8.4 7 10 4-1.6 7-5.4 7-10V6l-7-3Z"/><path d="m9.2 12 2 2 3.6-4"/></svg>',
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 0-3 3V4Z"/><path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H18"/></svg>',
+  search:'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 1.9"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  up:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V5m0 0 -4.5 4.5M12 5l4.5 4.5"/><path d="M4 19h16"/></svg>',
+};
+
+/* ================= dates ================= */
+const TODAY = new Date().toISOString().slice(0,10);
+function days(from,to){ return Math.round((new Date(to)-new Date(from))/864e5); }
+function fmt(d){ if(!d) return '—'; const dt=new Date(d+'T12:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+function esc(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function initials(n){ return n.split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase(); }
+
+/* ================= required documents (245D) ================= */
+const STAFF_DOCS = [
+  {key:'application', name:'Employment application', req:'§ 245D.095, subd. 5(1)'},
+  {key:'jobDuties', name:'Job description acknowledgment (signed)', req:'§ 245D.095, subd. 5(2)'},
+  {key:'qualifications', name:'Documentation of qualifications for position', req:'§ 245D.095, subd. 5(3)'},
+  {key:'background', name:'Background study (NETStudy 2.0)', req:'Chapter 245C'},
+  {key:'orientation', name:'Orientation record', req:'§ 245D.09, subd. 4'},
+  {key:'training', name:'Annual training certificates', req:'§ 245D.09, subd. 5'},
+  {key:'evaluation', name:'Performance evaluation', req:'§ 245D.095, subd. 5(5)'},
+];
+const CLIENT_DOCS = [
+  {key:'admission', name:'Admission form (signed)', req:'§ 245D.095, subd. 3(1)'},
+  {key:'eligibility', name:'Service initiation / eligibility documentation', req:'§ 245D.095, subd. 3'},
+  {key:'cssp', name:'CSSP / support plan', req:'§ 245D.02, subd. 4b'},
+  {key:'csspAddendum', name:'CSSP addendum', req:'§ 245D.02, subd. 4c'},
+  {key:'iapp', name:'IAPP (abuse prevention plan)', req:'§ 245A.65, subd. 2'},
+  {key:'medOrders', name:'Medication / treatment orders', req:'§ 245D.05, subd. 1'},
+  {key:'medAuth', name:'Signed medication authorization', req:'§ 245D.05, subd. 2'},
+  {key:'serviceAuth', name:'Service authorization (units)', req:'County / MA'},
+];
+
+/* ================= seed data ================= */
+const SEED = {
+  staff: [
+    { id:'s1', name:'Jordan Lee', role:'Direct Support Professional', phone:'(612) 555-0141', email:'jordan@sonderhomecare.com', status:'Active',
+      hireDate:'2025-03-10', applicationDate:'2025-03-01', jobDutiesAckDate:'2025-03-10',
+      background:{submitted:'2025-03-02', result:'Eligible', date:'2025-03-08'},
+      firstSupervised:'2025-03-17', firstUnsupervised:'2025-04-02',
+      trainings:[
+        {subject:'Orientation to program requirements', date:'2025-03-12', hours:8, trainer:'A. Osman (Coordinator)', expires:''},
+        {subject:'Person-centered service planning (annual)', date:'2026-03-09', hours:4, trainer:'MN DSP Training Portal', expires:'2027-03-09'},
+        {subject:'Medication administration (annual)', date:'2026-04-06', hours:6, trainer:'RN Consultant', expires:'2027-04-06'},
+      ],
+      evaluations:[{date:'2026-03-10', by:'A. Osman', note:'Annual review completed. Meets expectations; strong rapport with clients.'}],
+      docs:{ application:{status:'received',file:'JLee_Application.pdf',date:'2025-03-01'}, jobDuties:{status:'received',file:'JLee_JobDuties_Signed.pdf',date:'2025-03-10'}, qualifications:{status:'received',file:'JLee_Resume_Refs.pdf',date:'2025-03-01'}, background:{status:'received',file:'JLee_NETStudy.pdf',date:'2025-03-08'}, orientation:{status:'received',file:'JLee_Orientation.pdf',date:'2025-03-12'}, training:{status:'received',file:'JLee_Training_2025.pdf',date:'2025-04-01'}, evaluation:{status:'received',file:'JLee_Eval_2026.pdf',date:'2026-03-10'} } },
+    { id:'s2', name:'Maria Santos', role:'Designated Coordinator', phone:'(612) 555-0142', email:'maria@sonderhomecare.com', status:'Active',
+      hireDate:'2024-08-19', applicationDate:'2024-08-05', jobDutiesAckDate:'2024-08-19',
+      background:{submitted:'2024-08-06', result:'Eligible', date:'2024-08-12'},
+      firstSupervised:'2024-08-26', firstUnsupervised:'2024-09-09',
+      trainings:[
+        {subject:'Orientation to program requirements', date:'2024-08-21', hours:8, trainer:'Owner', expires:''},
+        {subject:'245D coordinator responsibilities', date:'2025-09-02', hours:6, trainer:'ARRM webinar', expires:'2026-09-02'},
+      ],
+      evaluations:[{date:'2025-08-19', by:'Owner', note:'Annual review. Exceeds expectations on documentation quality.'}],
+      docs:{ application:{status:'received',file:'MSantos_Application.pdf',date:'2024-08-05'}, jobDuties:{status:'received',file:'MSantos_JobDuties.pdf',date:'2024-08-19'}, qualifications:{status:'received',file:'MSantos_Qualifications.pdf',date:'2024-08-05'}, background:{status:'received',file:'MSantos_NETStudy.pdf',date:'2024-08-12'}, orientation:{status:'received',file:'MSantos_Orientation.pdf',date:'2024-08-21'}, training:{status:'received',file:'MSantos_Training.pdf',date:'2025-09-02'}, evaluation:{status:'received',file:'MSantos_Eval_2025.pdf',date:'2025-08-19'} } },
+    { id:'s3', name:'Deqa Hassan', role:'Direct Support Professional', phone:'(612) 555-0143', email:'deqa@sonderhomecare.com', status:'Active',
+      hireDate:'2025-09-22', applicationDate:'2025-09-10', jobDutiesAckDate:'2025-09-22',
+      background:{submitted:'2025-09-11', result:'Eligible', date:'2025-09-18'},
+      firstSupervised:'2025-09-29', firstUnsupervised:'2025-10-13',
+      trainings:[
+        {subject:'Orientation to program requirements', date:'2025-09-24', hours:8, trainer:'M. Santos', expires:''},
+        {subject:'Person-centered service planning', date:'2025-09-26', hours:4, trainer:'MN DSP Training Portal', expires:'2026-09-26'},
+        {subject:'First aid & CPR', date:'2025-10-04', hours:5, trainer:'Red Cross', expires:'2026-10-04'},
+      ],
+      evaluations:[],
+      docs:{ application:{status:'received',file:'DHassan_Application.pdf',date:'2025-09-10'}, jobDuties:{status:'received',file:'DHassan_JobDuties.pdf',date:'2025-09-22'}, qualifications:{status:'received',file:'DHassan_Qualifications.pdf',date:'2025-09-10'}, background:{status:'received',file:'DHassan_NETStudy.pdf',date:'2025-09-18'}, orientation:{status:'received',file:'DHassan_Orientation.pdf',date:'2025-09-24'}, training:{status:'received',file:'DHassan_Training.pdf',date:'2025-10-04'}, evaluation:{status:'missing'} } },
+    { id:'s4', name:'Marcus Webb', role:'Direct Support Professional', phone:'(612) 555-0144', email:'marcus@sonderhomecare.com', status:'Active',
+      hireDate:'2025-07-14', applicationDate:'2025-07-01', jobDutiesAckDate:'2025-07-14',
+      background:{submitted:'2025-07-02', result:'Eligible', date:'2025-07-09'},
+      firstSupervised:'2025-07-21', firstUnsupervised:'2025-08-04',
+      trainings:[
+        {subject:'Orientation to program requirements', date:'2025-07-16', hours:8, trainer:'M. Santos', expires:''},
+        {subject:'Positive behavior support', date:'2025-08-11', hours:4, trainer:'MN DSP Training Portal', expires:'2026-08-11'},
+      ],
+      evaluations:[{date:'2026-07-14', by:'M. Santos', note:'Annual review completed. Reliable; encourage timelier progress notes.'}],
+      docs:{ application:{status:'received',file:'MWebb_Application.pdf',date:'2025-07-01'}, jobDuties:{status:'received',file:'MWebb_JobDuties.pdf',date:'2025-07-14'}, qualifications:{status:'received',file:'MWebb_Qualifications.pdf',date:'2025-07-01'}, background:{status:'received',file:'MWebb_NETStudy.pdf',date:'2025-07-09'}, orientation:{status:'received',file:'MWebb_Orientation.pdf',date:'2025-07-16'}, training:{status:'received',file:'MWebb_Training.pdf',date:'2025-08-11'}, evaluation:{status:'received',file:'MWebb_Eval_2026.pdf',date:'2026-07-14'} } },
+    { id:'s5', name:'Amina Yusuf', role:'Direct Support Professional', phone:'(612) 555-0145', email:'amina@sonderhomecare.com', status:'Pending start',
+      hireDate:'2026-08-24', applicationDate:'2026-08-15', jobDutiesAckDate:'2026-08-24',
+      background:{submitted:'2026-08-18', result:'Pending', date:''},
+      firstSupervised:'', firstUnsupervised:'',
+      trainings:[],
+      evaluations:[],
+      docs:{ application:{status:'received',file:'AYusuf_Application.pdf',date:'2026-08-15'}, jobDuties:{status:'received',file:'AYusuf_JobDuties.pdf',date:'2026-08-24'}, qualifications:{status:'missing'}, background:{status:'missing'}, orientation:{status:'missing'}, training:{status:'missing'}, evaluation:{status:'missing'} } },
+  ],
+  clients: [
+    { id:'c1', name:'Alex Rivera', dob:'1985-07-22', address:'4215 Cedar Ave S, Minneapolis, MN 55407', phone:'(612) 555-0101', status:'Active',
+      admitted:'2025-01-10', discharged:'',
+      legalRep:'Sam Rivera (guardian) — (612) 555-0102', emergency:'Casey Rivera — (612) 555-0103', caseManager:'Taylor Kim, Hennepin County — (612) 555-0900',
+      others:'Sister visits Sundays; prefers contact via guardian',
+      health:{allergies:'Penicillin', dietary:'Low sodium', history:'Type 2 diabetes; seizure disorder (last event 2023)', meds:'Metformin 500mg BID; Keppra 750mg BID — see current orders'},
+      iappDate:'2025-01-10', iappReview:'2026-09-15', csspDate:'2025-01-08', units:'Authorized: Individualized Home Supports w/ Training, 1,240 units / yr',
+      notes:[
+        {date:'2026-08-27', by:'Jordan Lee', text:'Community outing to library. Practiced bus route independently; needed one prompt at transfer.'},
+        {date:'2026-08-25', by:'Deqa Hassan', text:'Meal prep support. Followed low-sodium plan; BG checked and in range.'},
+      ],
+      docs:{ admission:{status:'received',file:'ARivera_Admission.pdf',date:'2025-01-10'}, eligibility:{status:'received',file:'ARivera_Eligibility.pdf',date:'2025-01-06'}, cssp:{status:'received',file:'ARivera_CSSP.pdf',date:'2025-01-08'}, csspAddendum:{status:'received',file:'ARivera_CSSP_Addendum.pdf',date:'2025-01-20'}, iapp:{status:'received',file:'ARivera_IAPP.pdf',date:'2025-01-10'}, medOrders:{status:'received',file:'ARivera_MedOrders_2026.pdf',date:'2026-06-02'}, medAuth:{status:'received',file:'ARivera_MedAuth.pdf',date:'2025-01-10'}, serviceAuth:{status:'received',file:'ARivera_SA_2026.pdf',date:'2026-01-01'} } },
+    { id:'c2', name:'Linnea Berg', dob:'1998-11-03', address:'880 Payne Ave, St. Paul, MN 55130', phone:'(651) 555-0110', status:'Active',
+      admitted:'2025-06-02', discharged:'',
+      legalRep:'Self (no guardian)', emergency:'Ingrid Berg (mother) — (651) 555-0111', caseManager:'Devon Price, Ramsey County — (651) 555-0901',
+      others:'',
+      health:{allergies:'None known', dietary:'Vegetarian by preference', history:'Autism spectrum disorder; anxiety', meds:'Sertraline 50mg daily — self-administers, provider not responsible'},
+      iappDate:'2025-06-02', iappReview:'2026-06-02', csspDate:'2025-05-28', units:'Authorized: Individualized Home Supports, 960 units / yr',
+      notes:[
+        {date:'2026-08-26', by:'Marcus Webb', text:'Worked on budgeting goal. Completed weekly grocery plan within budget.'},
+      ],
+      docs:{ admission:{status:'received',file:'LBerg_Admission.pdf',date:'2025-06-02'}, eligibility:{status:'received',file:'LBerg_Eligibility.pdf',date:'2025-05-27'}, cssp:{status:'received',file:'LBerg_CSSP.pdf',date:'2025-05-28'}, csspAddendum:{status:'received',file:'LBerg_CSSP_Addendum.pdf',date:'2025-06-10'}, iapp:{status:'expired',file:'LBerg_IAPP_2025.pdf',date:'2025-06-02'}, medOrders:{status:'na'}, medAuth:{status:'na'}, serviceAuth:{status:'received',file:'LBerg_SA_2026.pdf',date:'2026-01-01'} } },
+    { id:'c3', name:'Samuel Okafor', dob:'1972-02-14', address:'2310 Nicollet Ave, Minneapolis, MN 55404', phone:'(612) 555-0120', status:'Active',
+      admitted:'2026-07-21', discharged:'',
+      legalRep:'Adaeze Okafor (spouse, POA) — (612) 555-0121', emergency:'Adaeze Okafor — (612) 555-0121', caseManager:'Riley Chen, Hennepin County — (612) 555-0902',
+      others:'Adult son lives nearby; okay to contact for scheduling',
+      health:{allergies:'Sulfa drugs', dietary:'Diabetic diet', history:'Stroke (2024) with left-side weakness; hypertension; T2 diabetes', meds:'Lisinopril 20mg daily; Metformin 1000mg BID — see current orders'},
+      iappDate:'2026-07-21', iappReview:'2027-07-21', csspDate:'2026-07-18', units:'Authorized: Individualized Home Supports w/o Training, 1,560 units / yr',
+      notes:[
+        {date:'2026-08-28', by:'Jordan Lee', text:'AM routine support. Transfer assist x1; no concerns. Reminded PM meds per orders.'},
+      ],
+      docs:{ admission:{status:'received',file:'SOkafor_Admission.pdf',date:'2026-07-21'}, eligibility:{status:'received',file:'SOkafor_Eligibility.pdf',date:'2026-07-15'}, cssp:{status:'received',file:'SOkafor_CSSP.pdf',date:'2026-07-18'}, csspAddendum:{status:'missing'}, iapp:{status:'received',file:'SOkafor_IAPP.pdf',date:'2026-07-21'}, medOrders:{status:'received',file:'SOkafor_MedOrders.pdf',date:'2026-07-21'}, medAuth:{status:'missing'}, serviceAuth:{status:'received',file:'SOkafor_SA.pdf',date:'2026-07-21'} } },
+    { id:'c4', name:'Grace Thao', dob:'2001-05-30', address:'1509 Rice St, St. Paul, MN 55117', phone:'(651) 555-0130', status:'Discharged',
+      admitted:'2024-04-15', discharged:'2026-05-31',
+      legalRep:'Self', emergency:'Mai Thao (mother) — (651) 555-0131', caseManager:'Devon Price, Ramsey County — (651) 555-0901',
+      others:'',
+      health:{allergies:'None known', dietary:'No restrictions', history:'Developmental disability', meds:'None'},
+      iappDate:'2024-04-15', iappReview:'', csspDate:'2024-04-10', units:'—',
+      notes:[{date:'2026-05-31', by:'M. Santos', text:'Service ended at family request; moved to another county. Discharge summary in file.'}],
+      docs:{ admission:{status:'received',file:'GThao_Admission.pdf',date:'2024-04-15'}, eligibility:{status:'received',file:'GThao_Eligibility.pdf',date:'2024-04-10'}, cssp:{status:'received',file:'GThao_CSSP.pdf',date:'2024-04-10'}, csspAddendum:{status:'received',file:'GThao_Addendum.pdf',date:'2024-04-28'}, iapp:{status:'received',file:'GThao_IAPP.pdf',date:'2024-04-15'}, medOrders:{status:'na'}, medAuth:{status:'na'}, serviceAuth:{status:'received',file:'GThao_SA.pdf',date:'2024-04-15'} } },
+  ],
+};
+
+/* ================= state ================= */
+const LS_KEY = 'sonder-care-records-v1';
+let db;
+try { db = JSON.parse(localStorage.getItem(LS_KEY)) || null; } catch(e){ db = null; }
+if(!db || !db.staff || !db.clients) db = JSON.parse(JSON.stringify(SEED));
+function save(){ try { localStorage.setItem(LS_KEY, JSON.stringify(db)); } catch(e){} }
+
+let ui = { view:'dashboard', id:null, tab:null, q:'', filter:'all' };
+
+/* ================= compliance engine ================= */
+function docState(entry, expiresHint){
+  if(!entry || entry.status==='missing') return 'miss';
+  if(entry.status==='na') return 'na';
+  if(entry.status==='expired') return 'exp';
+  if(expiresHint && days(TODAY, expiresHint) < 0) return 'exp';
+  return 'got';
+}
+function staffAlerts(s){
+  const a=[];
+  for(const t of s.trainings){
+    if(!t.expires) continue;
+    const d = days(TODAY, t.expires);
+    if(d<0) a.push({sev:'bad', title:`Training expired: ${t.subject}`, sub:s.name, when:fmt(t.expires), go:()=>open('staff',s.id,'training')});
+    else if(d<=60) a.push({sev:'warn', title:`Training expires in ${d} days: ${t.subject}`, sub:s.name, when:fmt(t.expires), go:()=>open('staff',s.id,'training')});
+  }
+  if(s.background.result==='Pending') a.push({sev:'warn', title:'Background study pending — no unsupervised contact permitted', sub:s.name, when:'Submitted '+fmt(s.background.submitted), go:()=>open('staff',s.id,'profile')});
+  const miss = STAFF_DOCS.filter(d=>docState(s.docs[d.key])==='miss');
+  if(miss.length) a.push({sev:'bad', title:`${miss.length} required document${miss.length>1?'s':''} missing`, sub:s.name+' — '+miss.map(m=>m.name).slice(0,2).join(', ')+(miss.length>2?'…':''), when:'', go:()=>open('staff',s.id,'docs')});
+  return a;
+}
+function clientAlerts(c){
+  const a=[];
+  if(c.status!=='Active') return a;
+  if(c.iappReview){
+    const d = days(TODAY, c.iappReview);
+    if(d<0) a.push({sev:'bad', title:'IAPP annual review overdue', sub:c.name, when:'Due '+fmt(c.iappReview), go:()=>open('clients',c.id,'plans')});
+    else if(d<=60) a.push({sev:'warn', title:`IAPP review due in ${d} days`, sub:c.name, when:fmt(c.iappReview), go:()=>open('clients',c.id,'plans')});
+  }
+  const miss = CLIENT_DOCS.filter(d=>docState(c.docs[d.key])==='miss');
+  if(miss.length) a.push({sev:'bad', title:`${miss.length} required document${miss.length>1?'s':''} missing`, sub:c.name+' — '+miss.map(m=>m.name).slice(0,2).join(', ')+(miss.length>2?'…':''), when:'', go:()=>open('clients',c.id,'docs')});
+  const exp = CLIENT_DOCS.filter(d=>docState(c.docs[d.key])==='exp');
+  if(exp.length) a.push({sev:'warn', title:`${exp.length} document${exp.length>1?'s':''} expired / needs renewal`, sub:c.name+' — '+exp.map(m=>m.name).join(', '), when:'', go:()=>open('clients',c.id,'docs')});
+  return a;
+}
+function allAlerts(){
+  const a = [...db.staff.flatMap(staffAlerts), ...db.clients.flatMap(clientAlerts)];
+  return a.sort((x,y)=> (x.sev==='bad'?0:1)-(y.sev==='bad'?0:1));
+}
+
+/* ================= navigation ================= */
+function open(view,id=null,tab=null){ ui.view=view; ui.id=id; ui.tab=tab; ui.q=''; ui.filter='all'; render(); window.scrollTo(0,0); }
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2400); }
+
+/* ================= render ================= */
+const app = document.getElementById('app');
+function render(){
+  const alerts = allAlerts();
+  const navItem=(key,icon,label,count)=>`
+    <button class="${ui.view===key?'on':''}" data-nav="${key}">${icon}<span class="lbl">${label}</span>${count!=null?`<span class="count num">${count}</span>`:''}</button>`;
+  app.innerHTML = `
+  <aside class="side">
+    <div class="wordmark">
+      <div class="wm-name">Sonder</div>
+      <div class="wm-sub">Care Records</div>
+    </div>
+    <nav class="nav">
+      ${navItem('dashboard',I.home,'Dashboard',null)}
+      ${navItem('staff',I.staff,'Caregivers',db.staff.length)}
+      ${navItem('clients',I.client,'Clients',db.clients.filter(c=>c.status==='Active').length)}
+      ${navItem('compliance',I.shield,'Compliance',alerts.length||null)}
+      ${navItem('register',I.book,'Register',null)}
+    </nav>
+    <div class="side-foot"><b>245D basic + intensive</b><br>Record standards per Minn. Stat. § 245D.095. Demo data only — not for live PHI.</div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="search">${I.search}<input id="q" placeholder="Search caregivers and clients…" value="${esc(ui.q)}" aria-label="Search"></div>
+      <span style="flex:1"></span>
+      <button class="btn" data-act="addStaff">${I.plus} Caregiver</button>
+      <button class="btn primary" data-act="addClient">${I.plus} Client</button>
+    </div>
+    <div class="content" id="view"></div>
+  </div>`;
+  const v = document.getElementById('view');
+  if(ui.q) v.innerHTML = vSearch();
+  else if(ui.view==='dashboard') v.innerHTML = vDash(alerts);
+  else if(ui.view==='staff') v.innerHTML = ui.id? vStaffDetail() : vStaffList();
+  else if(ui.view==='clients') v.innerHTML = ui.id? vClientDetail() : vClientList();
+  else if(ui.view==='compliance') v.innerHTML = vCompliance(alerts);
+  else if(ui.view==='register') v.innerHTML = vRegister();
+  wire();
+}
+
+/* ---------- dashboard ---------- */
+function vDash(alerts){
+  const bad = alerts.filter(a=>a.sev==='bad').length, warn = alerts.filter(a=>a.sev==='warn').length;
+  const expSoon = db.staff.flatMap(s=>s.trainings.filter(t=>t.expires && days(TODAY,t.expires)<=60)).length;
+  const recentNotes = db.clients.flatMap(c=>c.notes.map(n=>({...n, client:c.name, cid:c.id}))).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
+  return `
+  <div class="page-h"><h1>Good ${new Date().getHours()<12?'morning':'afternoon'} — here's where things stand</h1></div>
+  <p class="page-sub">${fmt(TODAY)} · ${db.clients.filter(c=>c.status==='Active').length} active clients · ${db.staff.filter(s=>s.status==='Active').length} active caregivers</p>
+  <div class="kpis">
+    <div class="kpi ${bad?'alert':''}"><div class="k-label">Action needed</div><div class="k-val num">${bad}</div><div class="k-sub">missing or overdue items</div></div>
+    <div class="kpi ${warn?'watch':''}"><div class="k-label">Coming due</div><div class="k-val num">${warn}</div><div class="k-sub">within the next 60 days</div></div>
+    <div class="kpi"><div class="k-label">Trainings expiring</div><div class="k-val num">${expSoon}</div><div class="k-sub">in the next 60 days</div></div>
+    <div class="kpi"><div class="k-label">Active clients</div><div class="k-val num">${db.clients.filter(c=>c.status==='Active').length}</div><div class="k-sub">${db.clients.filter(c=>c.status!=='Active').length} discharged on register</div></div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="card-h"><h3>Compliance alerts</h3><span class="spacer"></span><button class="btn sm" data-nav="compliance">View all</button></div>
+      ${alerts.length? alerts.slice(0,7).map((a,i)=>alertRow(a,i)).join('') : `<div class="empty">Everything current. Nothing needs attention.</div>`}
+    </div>
+    <div class="card">
+      <div class="card-h"><h3>Recent service documentation</h3></div>
+      ${recentNotes.length? recentNotes.map(n=>`
+        <div class="alert-row" data-open="clients:${n.cid}:notes">
+          <div class="a-dot" style="background:var(--teal)"></div>
+          <div class="a-body"><div class="a-title">${esc(n.client)}</div><div class="a-sub">${esc(n.text.length>90?n.text.slice(0,90)+'…':n.text)}</div></div>
+          <div class="a-when">${fmt(n.date)}</div>
+        </div>`).join('') : `<div class="empty">No service notes yet.</div>`}
+    </div>
+  </div>`;
+}
+function alertRow(a,i){
+  return `<div class="alert-row" data-alert="${i}">
+    <div class="a-dot" style="background:${a.sev==='bad'?'var(--red)':'var(--amber)'}"></div>
+    <div class="a-body"><div class="a-title">${esc(a.title)}</div><div class="a-sub">${esc(a.sub)}</div></div>
+    ${a.when?`<div class="a-when">${esc(a.when)}</div>`:''}
+  </div>`;
+}
+
+/* ---------- search ---------- */
+function vSearch(){
+  const q = ui.q.toLowerCase();
+  const st = db.staff.filter(s=>s.name.toLowerCase().includes(q)||s.role.toLowerCase().includes(q));
+  const cl = db.clients.filter(c=>c.name.toLowerCase().includes(q)||(c.caseManager||'').toLowerCase().includes(q));
+  return `
+  <div class="page-h"><h1>Results for “${esc(ui.q)}”</h1></div>
+  <div class="grid g2 mt">
+    <div class="card"><div class="card-h"><h3>Caregivers (${st.length})</h3></div>
+      ${st.length? st.map(s=>`<div class="alert-row" data-open="staff:${s.id}:profile"><div class="avatar" style="width:34px;height:34px;font-size:13px;border-radius:9px">${initials(s.name)}</div><div class="a-body"><div class="a-title">${esc(s.name)}</div><div class="a-sub">${esc(s.role)}</div></div></div>`).join(''):`<div class="empty">No matches</div>`}</div>
+    <div class="card"><div class="card-h"><h3>Clients (${cl.length})</h3></div>
+      ${cl.length? cl.map(c=>`<div class="alert-row" data-open="clients:${c.id}:overview"><div class="avatar client" style="width:34px;height:34px;font-size:13px;border-radius:9px">${initials(c.name)}</div><div class="a-body"><div class="a-title">${esc(c.name)}</div><div class="a-sub">${esc(c.caseManager||'')}</div></div></div>`).join(''):`<div class="empty">No matches</div>`}</div>
+  </div>`;
+}
+
+/* ---------- staff list ---------- */
+function staffDocSummary(s){
+  const miss = STAFF_DOCS.filter(d=>docState(s.docs[d.key])==='miss').length;
+  const exp = s.trainings.filter(t=>t.expires && days(TODAY,t.expires)<0).length;
+  if(miss) return `<span class="pill p-bad"><span class="dot"></span>${miss} missing</span>`;
+  if(exp) return `<span class="pill p-warn"><span class="dot"></span>training expired</span>`;
+  const soon = s.trainings.filter(t=>t.expires && days(TODAY,t.expires)>=0 && days(TODAY,t.expires)<=60).length;
+  if(soon) return `<span class="pill p-warn"><span class="dot"></span>due soon</span>`;
+  return `<span class="pill p-good"><span class="dot"></span>complete</span>`;
+}
+function vStaffList(){
+  let list = db.staff;
+  if(ui.filter==='issues') list = list.filter(s=>staffAlerts(s).length);
+  return `
+  <div class="page-h"><h1>Caregivers</h1><span class="stat-ref">Personnel records · Minn. Stat. § 245D.095, subd. 5</span></div>
+  <p class="page-sub">Every field and document DHS looks for in a personnel file: hire date, application, signed job description, qualifications, background study, first supervised and unsupervised direct-contact dates, training hours, and evaluations.</p>
+  <div class="list-tools">
+    <div class="chipset">
+      <button class="chip ${ui.filter==='all'?'on':''}" data-filter="all">All (${db.staff.length})</button>
+      <button class="chip ${ui.filter==='issues'?'on':''}" data-filter="issues">Needs attention (${db.staff.filter(s=>staffAlerts(s).length).length})</button>
+    </div>
+  </div>
+  <div class="card table-wrap"><table>
+    <thead><tr><th>Name</th><th>Hired</th><th>Background study</th><th>First unsupervised</th><th>Records</th><th>Status</th></tr></thead>
+    <tbody>${list.map(s=>`
+      <tr class="rowlink" data-open="staff:${s.id}:profile">
+        <td><div class="who">${esc(s.name)}</div><div class="sub">${esc(s.role)}</div></td>
+        <td class="num">${fmt(s.hireDate)}</td>
+        <td>${s.background.result==='Eligible'?`<span class="pill p-good"><span class="dot"></span>Eligible ${fmt(s.background.date)}</span>`:`<span class="pill p-warn"><span class="dot"></span>${esc(s.background.result)}</span>`}</td>
+        <td class="num">${s.firstUnsupervised?fmt(s.firstUnsupervised):'<span class="pill p-mut">not yet</span>'}</td>
+        <td>${staffDocSummary(s)}</td>
+        <td><span class="pill ${s.status==='Active'?'p-teal':'p-mut'}">${esc(s.status)}</span></td>
+      </tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+/* ---------- staff detail ---------- */
+function vStaffDetail(){
+  const s = db.staff.find(x=>x.id===ui.id); if(!s) return '<div class="empty">Not found</div>';
+  const tab = ui.tab||'profile';
+  const missDocs = STAFF_DOCS.filter(d=>docState(s.docs[d.key])==='miss').length;
+  const tabs = [
+    ['profile','Profile'],['training','Training'],['docs',`Documents${missDocs?`<span class="t-badge">${missDocs}</span>`:''}`],['evals','Evaluations'],
+  ];
+  return `
+  <div class="crumb"><button data-nav="staff">Caregivers</button><span>/</span><span>${esc(s.name)}</span></div>
+  <div class="det-head">
+    <div class="avatar">${initials(s.name)}</div>
+    <div><h1>${esc(s.name)}</h1><div class="d-sub">${esc(s.role)} · hired ${fmt(s.hireDate)}</div></div>
+    <div class="d-right"><span class="pill ${s.status==='Active'?'p-teal':'p-mut'}">${esc(s.status)}</span></div>
+  </div>
+  <div class="tabs">${tabs.map(([k,l])=>`<button class="${tab===k?'on':''}" data-tab="${k}">${l}</button>`).join('')}</div>
+  ${tab==='profile'? staffProfile(s) : tab==='training'? staffTraining(s) : tab==='docs'? docChecklist(s, STAFF_DOCS, 'staff') : staffEvals(s)}`;
+}
+function field(label,val,missing){ return `<div class="field"><div class="f-label">${label}</div><div class="f-val ${(!val&&missing)?'missing':''}">${val?esc(val):(missing||'—')}</div></div>`; }
+function staffProfile(s){
+  return `<div class="grid g2">
+    <div class="card"><div class="card-h"><h3>Employment record</h3></div><div class="card-b"><div class="fields" style="grid-template-columns:1fr">
+      ${field('Date of hire', fmt(s.hireDate))}
+      ${field('Application received', fmt(s.applicationDate))}
+      ${field('Job description acknowledgment signed', fmt(s.jobDutiesAckDate))}
+      ${field('Phone', s.phone)}
+      ${field('Email', s.email)}
+    </div></div></div>
+    <div class="card"><div class="card-h"><h3>Background & direct contact</h3></div><div class="card-b"><div class="fields" style="grid-template-columns:1fr">
+      ${field('Background study submitted', fmt(s.background.submitted))}
+      <div class="field"><div class="f-label">Background study result</div><div class="f-val">${s.background.result==='Eligible'?`<span class="pill p-good"><span class="dot"></span>Eligible — ${fmt(s.background.date)}</span>`:`<span class="pill p-warn"><span class="dot"></span>${esc(s.background.result)}</span>`}</div></div>
+      ${field('First supervised direct contact', s.firstSupervised?fmt(s.firstSupervised):'', 'not recorded')}
+      ${field('First unsupervised direct contact', s.firstUnsupervised?fmt(s.firstUnsupervised):'', 'not recorded')}
+      <div class="hint" style="padding-top:8px">Unsupervised direct contact requires a cleared background study (chapter 245C) and documented orientation.</div>
+    </div></div></div>
+  </div>`;
+}
+function staffTraining(s){
+  const rows = s.trainings.map((t,i)=>{
+    const d = t.expires? days(TODAY,t.expires) : null;
+    const st = d==null? '<span class="pill p-mut">n/a</span>' : d<0? `<span class="pill p-bad"><span class="dot"></span>expired</span>` : d<=60? `<span class="pill p-warn"><span class="dot"></span>${d}d left</span>` : `<span class="pill p-good"><span class="dot"></span>current</span>`;
+    return `<tr><td><div class="who">${esc(t.subject)}</div><div class="sub">${esc(t.trainer)}</div></td><td class="num">${fmt(t.date)}</td><td class="num">${t.hours}</td><td class="num">${t.expires?fmt(t.expires):'—'}</td><td>${st}</td></tr>`;
+  }).join('');
+  const total = s.trainings.reduce((a,t)=>a+Number(t.hours||0),0);
+  return `<div class="card table-wrap">
+    <div class="card-h"><h3>Training record — ${total} hrs documented</h3><span class="spacer"></span><button class="btn sm" data-act="addTraining">${I.plus} Log training</button></div>
+    <table><thead><tr><th>Subject / trainer</th><th>Date</th><th>Hours</th><th>Expires</th><th>Status</th></tr></thead>
+    <tbody>${rows||''}</tbody></table>
+    ${!s.trainings.length?'<div class="empty">No training logged yet. Orientation must be completed before unsupervised contact.</div>':''}
+  </div>`;
+}
+function staffEvals(s){
+  return `<div class="card">
+    <div class="card-h"><h3>Performance evaluations</h3><span class="spacer"></span><button class="btn sm" data-act="addEval">${I.plus} Add evaluation</button></div>
+    <div class="card-b">
+      ${s.evaluations.length? s.evaluations.map(e=>`<div class="note"><div class="n-head"><b>${esc(e.by)}</b><span>·</span><span>${fmt(e.date)}</span></div><div class="n-text">${esc(e.note)}</div></div>`).join('') : `<div class="empty">No evaluations on file. An annual performance evaluation is part of the personnel record.</div>`}
+    </div></div>`;
+}
+
+/* ---------- client list ---------- */
+function clientDocSummary(c){
+  const miss = CLIENT_DOCS.filter(d=>docState(c.docs[d.key])==='miss').length;
+  const exp = CLIENT_DOCS.filter(d=>docState(c.docs[d.key])==='exp').length;
+  if(miss) return `<span class="pill p-bad"><span class="dot"></span>${miss} missing</span>`;
+  if(exp) return `<span class="pill p-warn"><span class="dot"></span>${exp} expired</span>`;
+  return `<span class="pill p-good"><span class="dot"></span>complete</span>`;
+}
+function vClientList(){
+  let list = db.clients;
+  if(ui.filter==='active') list = list.filter(c=>c.status==='Active');
+  if(ui.filter==='issues') list = list.filter(c=>clientAlerts(c).length);
+  return `
+  <div class="page-h"><h1>Clients</h1><span class="stat-ref">Service recipient records · Minn. Stat. § 245D.095, subd. 3</span></div>
+  <p class="page-sub">Admission details, legal representative and emergency contacts, case manager, health information, support plans, IAPP review dates, service documentation, and the required state documents for each person served.</p>
+  <div class="list-tools"><div class="chipset">
+    <button class="chip ${ui.filter==='all'?'on':''}" data-filter="all">All (${db.clients.length})</button>
+    <button class="chip ${ui.filter==='active'?'on':''}" data-filter="active">Active (${db.clients.filter(c=>c.status==='Active').length})</button>
+    <button class="chip ${ui.filter==='issues'?'on':''}" data-filter="issues">Needs attention (${db.clients.filter(c=>clientAlerts(c).length).length})</button>
+  </div></div>
+  <div class="card table-wrap"><table>
+    <thead><tr><th>Name</th><th>Admitted</th><th>Case manager</th><th>IAPP review</th><th>Records</th><th>Status</th></tr></thead>
+    <tbody>${list.map(c=>{
+      const d = c.iappReview? days(TODAY,c.iappReview):null;
+      const iapp = !c.iappReview? '—' : d<0? `<span class="pill p-bad"><span class="dot"></span>overdue</span>` : d<=60? `<span class="pill p-warn"><span class="dot"></span>${fmt(c.iappReview)}</span>` : `<span class="num">${fmt(c.iappReview)}</span>`;
+      return `<tr class="rowlink" data-open="clients:${c.id}:overview">
+        <td><div class="who">${esc(c.name)}</div><div class="sub">DOB ${fmt(c.dob)}</div></td>
+        <td class="num">${fmt(c.admitted)}</td>
+        <td><div class="sub" style="font-size:13px;color:var(--ink)">${esc((c.caseManager||'').split(',')[0])}</div></td>
+        <td>${iapp}</td>
+        <td>${clientDocSummary(c)}</td>
+        <td><span class="pill ${c.status==='Active'?'p-teal':'p-mut'}">${esc(c.status)}</span></td>
+      </tr>`;}).join('')}</tbody>
+  </table></div>`;
+}
+
+/* ---------- client detail ---------- */
+function vClientDetail(){
+  const c = db.clients.find(x=>x.id===ui.id); if(!c) return '<div class="empty">Not found</div>';
+  const tab = ui.tab||'overview';
+  const missDocs = CLIENT_DOCS.filter(d=>docState(c.docs[d.key])==='miss').length;
+  const tabs = [['overview','Admission & Contacts'],['health','Health & Meds'],['plans','Plans & IAPP'],['notes','Service Notes'],['docs',`Documents${missDocs?`<span class="t-badge">${missDocs}</span>`:''}`]];
+  return `
+  <div class="crumb"><button data-nav="clients">Clients</button><span>/</span><span>${esc(c.name)}</span></div>
+  <div class="det-head">
+    <div class="avatar client">${initials(c.name)}</div>
+    <div><h1>${esc(c.name)}</h1><div class="d-sub">DOB ${fmt(c.dob)} · admitted ${fmt(c.admitted)}${c.discharged?` · discharged ${fmt(c.discharged)}`:''}</div></div>
+    <div class="d-right">
+      ${c.status==='Active'?`<button class="btn sm danger" data-act="discharge">Discharge…</button>`:''}
+      <span class="pill ${c.status==='Active'?'p-teal':'p-mut'}">${esc(c.status)}</span>
+    </div>
+  </div>
+  <div class="tabs">${tabs.map(([k,l])=>`<button class="${tab===k?'on':''}" data-tab="${k}">${l}</button>`).join('')}</div>
+  ${tab==='overview'? clientOverview(c) : tab==='health'? clientHealth(c) : tab==='plans'? clientPlans(c) : tab==='notes'? clientNotes(c) : docChecklist(c, CLIENT_DOCS, 'clients')}`;
+}
+function clientOverview(c){
+  return `<div class="grid g2">
+    <div class="card"><div class="card-h"><h3>Identifying information</h3></div><div class="card-b"><div class="fields" style="grid-template-columns:1fr">
+      ${field('Full name', c.name)}${field('Date of birth', fmt(c.dob))}${field('Address', c.address)}${field('Phone', c.phone)}${field('Admission date', fmt(c.admitted))}
+    </div></div></div>
+    <div class="card"><div class="card-h"><h3>Contacts</h3></div><div class="card-b"><div class="fields" style="grid-template-columns:1fr">
+      ${field('Legal representative', c.legalRep, 'not recorded')}
+      ${field('Primary emergency contact', c.emergency, 'not recorded')}
+      ${field('Case manager', c.caseManager, 'not recorded')}
+      ${field('Family / other contacts', c.others || '')}
+    </div></div></div>
+  </div>`;
+}
+function clientHealth(c){
+  return `<div class="grid g2">
+    <div class="card"><div class="card-h"><h3>Health information</h3></div><div class="card-b"><div class="fields" style="grid-template-columns:1fr">
+      ${field('Allergies', c.health.allergies, 'not recorded')}
+      ${field('Dietary needs', c.health.dietary, 'not recorded')}
+      ${field('Relevant medical history', c.health.history, 'not recorded')}
+    </div></div></div>
+    <div class="card"><div class="card-h"><h3>Medications & treatment</h3></div><div class="card-b"><div class="fields" style="grid-template-columns:1fr">
+      ${field('Current medications / orders', c.health.meds, 'not recorded')}
+      <div class="hint" style="padding-top:8px">If the program is responsible for medication administration or assistance under § 245D.05, current written orders and a signed authorization must be on file — tracked in the Documents tab.</div>
+    </div></div></div>
+  </div>`;
+}
+function clientPlans(c){
+  const d = c.iappReview? days(TODAY,c.iappReview):null;
+  return `<div class="grid g2">
+    <div class="card"><div class="card-h"><h3>Support planning</h3></div><div class="card-b"><div class="fields" style="grid-template-columns:1fr">
+      ${field('CSSP received', c.csspDate?fmt(c.csspDate):'', 'not recorded')}
+      ${field('Service authorization', c.units, 'not recorded')}
+    </div></div></div>
+    <div class="card"><div class="card-h"><h3>IAPP — individual abuse prevention plan</h3></div><div class="card-b"><div class="fields" style="grid-template-columns:1fr">
+      ${field('IAPP completed', c.iappDate?fmt(c.iappDate):'', 'not recorded')}
+      <div class="field"><div class="f-label">Next annual review</div><div class="f-val">${!c.iappReview?'—': d<0? `<span class="pill p-bad"><span class="dot"></span>Overdue — was due ${fmt(c.iappReview)}</span>` : d<=60? `<span class="pill p-warn"><span class="dot"></span>${fmt(c.iappReview)} (${d} days)</span>` : fmt(c.iappReview)}</div></div>
+      ${c.status==='Active'&&c.iappReview?`<div style="padding-top:10px"><button class="btn sm" data-act="iappReviewed">Mark reviewed today → next due in 1 year</button></div>`:''}
+    </div></div></div>
+  </div>`;
+}
+function clientNotes(c){
+  return `<div class="card">
+    <div class="card-h"><h3>Service documentation</h3><span class="spacer"></span><button class="btn sm" data-act="addNote">${I.plus} New note</button></div>
+    <div class="card-b">
+      ${c.notes.length? c.notes.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(n=>`<div class="note"><div class="n-head"><b>${esc(n.by)}</b><span>·</span><span>${fmt(n.date)}</span></div><div class="n-text">${esc(n.text)}</div></div>`).join('') : '<div class="empty">No service notes yet.</div>'}
+    </div></div>`;
+}
+
+/* ---------- document checklist (shared) ---------- */
+function docChecklist(entity, defs, kind){
+  const got = defs.filter(d=>docState(entity.docs[d.key])==='got').length;
+  const applicable = defs.filter(d=>docState(entity.docs[d.key])!=='na').length;
+  return `<div class="card">
+    <div class="card-h"><h3>Required documents — ${got} of ${applicable} on file</h3></div>
+    ${defs.map(d=>{
+      const e = entity.docs[d.key]; const st = docState(e);
+      const ic = st==='got'? `<div class="doc-ic got">${I.check}</div>` : st==='miss'? `<div class="doc-ic miss">${I.x}</div>` : st==='exp'? `<div class="doc-ic exp">${I.clock}</div>` : `<div class="doc-ic" style="background:var(--line-soft);color:var(--faint)">—</div>`;
+      const meta = st==='na'? 'Not applicable for this record' : st==='miss'? '<span style="color:var(--red)">Missing — required for a complete file</span>' : st==='exp'? `<span style="color:var(--amber-ink)">Expired / needs renewal · ${esc(e.file||'')}</span>` : `${esc(e.file||'On file')} · uploaded ${fmt(e.date)}`;
+      return `<div class="doc-row">
+        ${ic}
+        <div class="doc-body"><div class="doc-name">${esc(d.name)}</div><div class="doc-meta">${meta}</div><div class="doc-req">${esc(d.req)}</div></div>
+        ${st!=='na'?`<button class="btn sm" data-updoc="${kind}:${d.key}">${I.up} ${st==='got'?'Replace':'Upload'}</button>`:''}
+      </div>`;}).join('')}
+    <div class="empty" style="text-align:left;padding:12px 18px;font-size:12px">Prototype note: uploads record the file name and date for the audit checklist. Actual file storage arrives with the backend (encrypted object storage with signed URLs).</div>
+  </div>`;
+}
+
+/* ---------- compliance ---------- */
+function vCompliance(alerts){
+  const mx = (entity, defs) => defs.map(d=>{
+    const st = docState(entity.docs[d.key]);
+    if(st==='na') return `<td style="text-align:center"><span class="mx-cell" style="color:var(--faint)">·</span></td>`;
+    const cls = st==='got'?'mx-got':st==='exp'?'mx-exp':'mx-miss';
+    const icon = st==='got'?I.check:st==='exp'?I.clock:I.x;
+    return `<td style="text-align:center"><span class="mx-cell ${cls}" title="${esc(d.name)}">${icon}</span></td>`;
+  }).join('');
+  return `
+  <div class="page-h"><h1>Compliance</h1><span class="stat-ref">Audit-readiness at a glance</span></div>
+  <p class="page-sub">One row per record, one column per required document — what a DHS licensor would ask to see, before they ask.</p>
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-h"><h3>Open items (${alerts.length})</h3></div>
+    ${alerts.length? alerts.map((a,i)=>alertRow(a,i)).join('') : '<div class="empty">No open compliance items.</div>'}
+  </div>
+  <div class="grid g2">
+    <div class="card table-wrap">
+      <div class="card-h"><h3>Personnel files</h3></div>
+      <table><thead><tr><th>Caregiver</th>${STAFF_DOCS.map(d=>`<th title="${esc(d.name)}" style="text-align:center;padding:9px 4px">${esc(d.name.split(' ')[0].slice(0,6))}</th>`).join('')}</tr></thead>
+      <tbody>${db.staff.map(s=>`<tr class="rowlink" data-open="staff:${s.id}:docs"><td><div class="who" style="font-size:13px">${esc(s.name)}</div></td>${mx(s,STAFF_DOCS)}</tr>`).join('')}</tbody></table>
+    </div>
+    <div class="card table-wrap">
+      <div class="card-h"><h3>Client files</h3></div>
+      <table><thead><tr><th>Client</th>${CLIENT_DOCS.map(d=>`<th title="${esc(d.name)}" style="text-align:center;padding:9px 4px">${esc(d.name.split(' ')[0].slice(0,6))}</th>`).join('')}</tr></thead>
+      <tbody>${db.clients.map(c=>`<tr class="rowlink" data-open="clients:${c.id}:docs"><td><div class="who" style="font-size:13px">${esc(c.name)}</div></td>${mx(c,CLIENT_DOCS)}</tr>`).join('')}</tbody></table>
+    </div>
+  </div>
+  <div class="card mt"><div class="card-b legend">
+    <span><span class="mx-cell mx-got">${I.check}</span> on file</span>
+    <span><span class="mx-cell mx-exp">${I.clock}</span> expired / renewal due</span>
+    <span><span class="mx-cell mx-miss">${I.x}</span> missing</span>
+    <span>· not applicable</span>
+  </div></div>`;
+}
+
+/* ---------- register ---------- */
+function vRegister(){
+  const rows = db.clients.slice().sort((a,b)=>a.admitted.localeCompare(b.admitted));
+  return `
+  <div class="page-h"><h1>Admission & discharge register</h1><span class="stat-ref">§ 245D.095, subd. 2</span></div>
+  <p class="page-sub">A chronological register of every person admitted to and discharged from the program — a standing 245D requirement, kept current automatically as clients are added and discharged.</p>
+  <div class="card table-wrap"><table>
+    <thead><tr><th>#</th><th>Name</th><th>Admitted</th><th>Discharged</th><th>Length of service</th></tr></thead>
+    <tbody>${rows.map((c,i)=>`<tr class="rowlink" data-open="clients:${c.id}:overview">
+      <td class="num">${i+1}</td>
+      <td><div class="who">${esc(c.name)}</div></td>
+      <td class="num">${fmt(c.admitted)}</td>
+      <td class="num">${c.discharged?fmt(c.discharged):'<span class="pill p-teal">in service</span>'}</td>
+      <td class="num">${Math.max(1,Math.round(days(c.admitted, c.discharged||TODAY)/30.4))} mo</td>
+    </tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+/* ================= modals ================= */
+function modal(title, bodyHTML, onSubmit, submitLabel='Save'){
+  const scrim = document.createElement('div'); scrim.className='scrim';
+  scrim.innerHTML = `<div class="modal" role="dialog" aria-label="${esc(title)}">
+    <div class="m-h"><h2>${esc(title)}</h2><button data-close aria-label="Close">×</button></div>
+    <form><div class="m-b">${bodyHTML}</div>
+    <div class="m-f"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">${esc(submitLabel)}</button></div></form>
+  </div>`;
+  document.body.appendChild(scrim);
+  scrim.addEventListener('click', e=>{ if(e.target===scrim || e.target.closest('[data-close]')) scrim.remove(); });
+  scrim.querySelector('form').addEventListener('submit', e=>{
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target).entries());
+    if(onSubmit(f)!==false){ scrim.remove(); save(); render(); }
+  });
+  const first = scrim.querySelector('input,select,textarea'); if(first) first.focus();
+}
+const fg=(label,name,attrs='',type='input',opts='')=> type==='select'
+  ? `<div class="fg"><label>${label}</label><select name="${name}" ${attrs}>${opts}</select></div>`
+  : type==='textarea' ? `<div class="fg"><label>${label}</label><textarea name="${name}" ${attrs}></textarea></div>`
+  : `<div class="fg"><label>${label}</label><input name="${name}" ${attrs}></div>`;
+
+function addStaffModal(){
+  modal('New caregiver', `
+    ${fg('Full name','name','required placeholder="First Last"')}
+    <div class="frow">${fg('Role','role','value="Direct Support Professional"')}${fg('Date of hire','hireDate',`type="date" value="${TODAY}" required`)}</div>
+    <div class="frow">${fg('Phone','phone','placeholder="(612) 555-0100"')}${fg('Email','email','type="email"')}</div>
+    <div class="frow">${fg('Application received','applicationDate',`type="date" value="${TODAY}"`)}${fg('Job description signed','jobDutiesAckDate','type="date"')}</div>
+    ${fg('Background study submitted','bgSubmitted',`type="date" value="${TODAY}"`)}
+    <div class="hint">The record starts with an empty document checklist — upload the application, signed job description, and background study result as they come in. Unsupervised contact stays blocked until the study clears.</div>
+  `, f=>{
+    if(!f.name.trim()) return false;
+    db.staff.push({ id:'s'+Date.now(), name:f.name.trim(), role:f.role||'Direct Support Professional', phone:f.phone||'', email:f.email||'', status:'Pending start',
+      hireDate:f.hireDate, applicationDate:f.applicationDate||'', jobDutiesAckDate:f.jobDutiesAckDate||'',
+      background:{submitted:f.bgSubmitted||'', result:'Pending', date:''}, firstSupervised:'', firstUnsupervised:'',
+      trainings:[], evaluations:[], docs:Object.fromEntries(STAFF_DOCS.map(d=>[d.key,{status:'missing'}])) });
+    toast('Caregiver added'); ui.view='staff'; ui.id=db.staff[db.staff.length-1].id; ui.tab='profile';
+  }, 'Add caregiver');
+}
+function addClientModal(){
+  modal('New client admission', `
+    ${fg('Full name','name','required')}
+    <div class="frow">${fg('Date of birth','dob','type="date" required')}${fg('Admission date','admitted',`type="date" value="${TODAY}" required`)}</div>
+    ${fg('Address','address')}
+    <div class="frow">${fg('Phone','phone')}${fg('Case manager','caseManager','placeholder="Name, county — phone"')}</div>
+    ${fg('Legal representative','legalRep','placeholder="Name (relationship) — phone, or Self"')}
+    ${fg('Primary emergency contact','emergency','placeholder="Name — phone"')}
+    <div class="frow">${fg('Allergies','allergies','placeholder="None known"')}${fg('Dietary needs','dietary')}</div>
+    <div class="hint">Admission also adds this person to the admission & discharge register. The IAPP review date is set one year from admission.</div>
+  `, f=>{
+    if(!f.name.trim()) return false;
+    const admitted = f.admitted||TODAY;
+    const review = new Date(admitted+'T12:00'); review.setFullYear(review.getFullYear()+1);
+    db.clients.push({ id:'c'+Date.now(), name:f.name.trim(), dob:f.dob, address:f.address||'', phone:f.phone||'', status:'Active',
+      admitted, discharged:'', legalRep:f.legalRep||'', emergency:f.emergency||'', caseManager:f.caseManager||'', others:'',
+      health:{allergies:f.allergies||'', dietary:f.dietary||'', history:'', meds:''},
+      iappDate:admitted, iappReview:review.toISOString().slice(0,10), csspDate:'', units:'', notes:[],
+      docs:Object.fromEntries(CLIENT_DOCS.map(d=>[d.key,{status:'missing'}])) });
+    toast('Client admitted — added to register'); ui.view='clients'; ui.id=db.clients[db.clients.length-1].id; ui.tab='overview';
+  }, 'Admit client');
+}
+function addTrainingModal(s){
+  modal('Log training — '+s.name, `
+    ${fg('Subject','subject','required placeholder="e.g. Medication administration"')}
+    <div class="frow">${fg('Date','date',`type="date" value="${TODAY}" required`)}${fg('Hours','hours','type="number" step="0.5" min="0.5" value="1" required')}</div>
+    ${fg('Trainer','trainer','placeholder="Name or organization"')}
+    ${fg('Expires (annual refresh)','expires','type="date"')}
+  `, f=>{
+    s.trainings.push({subject:f.subject, date:f.date, hours:Number(f.hours), trainer:f.trainer||'', expires:f.expires||''});
+    toast('Training logged');
+  }, 'Log training');
+}
+function addEvalModal(s){
+  modal('Performance evaluation — '+s.name, `
+    <div class="frow">${fg('Date','date',`type="date" value="${TODAY}" required`)}${fg('Evaluated by','by','required')}</div>
+    ${fg('Summary','note','required','textarea')}
+  `, f=>{ s.evaluations.unshift({date:f.date, by:f.by, note:f.note}); toast('Evaluation added'); });
+}
+function addNoteModal(c){
+  modal('Service note — '+c.name, `
+    <div class="frow">${fg('Date','date',`type="date" value="${TODAY}" required`)}${fg('Staff','by','required placeholder="Your name"')}</div>
+    ${fg('Documentation','text','required placeholder="What service was provided, progress toward outcomes, anything notable…"','textarea')}
+  `, f=>{ c.notes.push({date:f.date, by:f.by, text:f.text}); toast('Note saved'); });
+}
+function dischargeModal(c){
+  modal('Discharge — '+c.name, `
+    ${fg('Discharge date','date',`type="date" value="${TODAY}" required`)}
+    ${fg('Summary / reason','text','required placeholder="Reason for discharge, where services transferred, summary…"','textarea')}
+    <div class="hint">Discharge closes the record and updates the admission & discharge register. The file itself is retained per record-retention requirements.</div>
+  `, f=>{
+    c.status='Discharged'; c.discharged=f.date; c.iappReview='';
+    c.notes.push({date:f.date, by:'Record', text:'DISCHARGE: '+f.text});
+    toast('Client discharged — register updated');
+  }, 'Discharge');
+}
+function uploadDoc(kind, key){
+  const entity = kind==='staff'? db.staff.find(x=>x.id===ui.id) : db.clients.find(x=>x.id===ui.id);
+  const input = document.createElement('input'); input.type='file'; input.accept='.pdf,.doc,.docx,.jpg,.png';
+  input.onchange = ()=>{
+    const file = input.files[0]; if(!file) return;
+    entity.docs[key] = {status:'received', file:file.name, date:TODAY};
+    save(); render(); toast('Recorded: '+file.name);
+  };
+  input.click();
+}
+
+/* ================= events ================= */
+function wire(){
+  document.querySelectorAll('[data-nav]').forEach(el=>el.addEventListener('click',()=>open(el.dataset.nav)));
+  document.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',()=>{ const [v,id,t]=el.dataset.open.split(':'); open(v,id,t); }));
+  document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',()=>{ ui.tab=el.dataset.tab; render(); }));
+  document.querySelectorAll('[data-filter]').forEach(el=>el.addEventListener('click',()=>{ ui.filter=el.dataset.filter; render(); }));
+  document.querySelectorAll('[data-alert]').forEach(el=>el.addEventListener('click',()=>{ allAlerts()[Number(el.dataset.alert)]?.go(); }));
+  document.querySelectorAll('[data-updoc]').forEach(el=>el.addEventListener('click',e=>{ e.stopPropagation(); const [k,key]=el.dataset.updoc.split(':'); uploadDoc(k,key); }));
+  document.querySelectorAll('[data-act]').forEach(el=>el.addEventListener('click',()=>{
+    const act = el.dataset.act;
+    const s = db.staff.find(x=>x.id===ui.id), c = db.clients.find(x=>x.id===ui.id);
+    if(act==='addStaff') addStaffModal();
+    else if(act==='addClient') addClientModal();
+    else if(act==='addTraining'&&s) addTrainingModal(s);
+    else if(act==='addEval'&&s) addEvalModal(s);
+    else if(act==='addNote'&&c) addNoteModal(c);
+    else if(act==='discharge'&&c) dischargeModal(c);
+    else if(act==='iappReviewed'&&c){ const n=new Date(); n.setFullYear(n.getFullYear()+1); c.iappReview=n.toISOString().slice(0,10); save(); render(); toast('IAPP review recorded'); }
+  }));
+  const q = document.getElementById('q');
+  q.addEventListener('input', ()=>{ ui.q=q.value; const v=document.getElementById('view'); v.innerHTML = ui.q? vSearch() : (ui.view==='dashboard'? vDash(allAlerts()) : ui.view==='staff'? (ui.id?vStaffDetail():vStaffList()) : ui.view==='clients'? (ui.id?vClientDetail():vClientList()) : ui.view==='compliance'? vCompliance(allAlerts()) : vRegister()); wire2(); });
+}
+/* re-wire view-only handlers after live search re-render (search input keeps focus) */
+function wire2(){
+  const v = document.getElementById('view');
+  v.querySelectorAll('[data-nav]').forEach(el=>el.addEventListener('click',()=>open(el.dataset.nav)));
+  v.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',()=>{ const [vw,id,t]=el.dataset.open.split(':'); open(vw,id,t); }));
+  v.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',()=>{ ui.tab=el.dataset.tab; render(); }));
+  v.querySelectorAll('[data-filter]').forEach(el=>el.addEventListener('click',()=>{ ui.filter=el.dataset.filter; render(); }));
+  v.querySelectorAll('[data-alert]').forEach(el=>el.addEventListener('click',()=>{ allAlerts()[Number(el.dataset.alert)]?.go(); }));
+  v.querySelectorAll('[data-updoc]').forEach(el=>el.addEventListener('click',e=>{ e.stopPropagation(); const [k,key]=el.dataset.updoc.split(':'); uploadDoc(k,key); }));
+  v.querySelectorAll('[data-act]').forEach(el=>el.addEventListener('click',()=>{
+    const act = el.dataset.act;
+    const s = db.staff.find(x=>x.id===ui.id), c = db.clients.find(x=>x.id===ui.id);
+    if(act==='addTraining'&&s) addTrainingModal(s);
+    else if(act==='addEval'&&s) addEvalModal(s);
+    else if(act==='addNote'&&c) addNoteModal(c);
+    else if(act==='discharge'&&c) dischargeModal(c);
+    else if(act==='iappReviewed'&&c){ const n=new Date(); n.setFullYear(n.getFullYear()+1); c.iappReview=n.toISOString().slice(0,10); save(); render(); toast('IAPP review recorded'); }
+  }));
+}
+render();
+</script>
