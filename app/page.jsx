@@ -159,66 +159,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="band" id="referrals">
-        <div className="wrap">
-          <div className="aud-head">
-            <div>
-              <div className="eyebrow" data-reveal>Referral process</div>
-              <h2 data-reveal style={{ '--d': '.08s' }}>From referral to first shift, in four steps.</h2>
-            </div>
-            <p className="lede" data-reveal style={{ '--d': '.16s' }}>A process case managers and discharge planners can set their watch to.</p>
-          </div>
-          <div className="steps-grid">
-            <div className="step" data-reveal><div className="n">1</div><h3>Reach out</h3><p>Call, email, or send the form with the basics. We reply within one business day.</p><div className="note">Day 1</div></div>
-            <div className="step" data-reveal style={{ '--d': '.1s' }}><div className="n">2</div><h3>Intake &amp; assessment</h3><p>We review the support plan, meet the client where they live, and tell you straight whether we&apos;re a fit.</p><div className="note">Week 1</div></div>
-            <div className="step" data-reveal style={{ '--d': '.2s' }}><div className="n">3</div><h3>Caregiver match &amp; schedule</h3><p>The family meets their caregiver, and we set a schedule that fits the household.</p><div className="note">Weeks 1&ndash;2</div></div>
-            <div className="step" data-reveal style={{ '--d': '.3s' }}><div className="n">4</div><h3>Services begin</h3><p>First shift on the calendar, then progress reports on schedule.</p><div className="note">Ongoing</div></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="why">
-        <div className="wrap">
-          <div className="aud-head">
-            <div>
-              <div className="eyebrow" data-reveal>Why Sonder</div>
-              <h2 data-reveal style={{ '--d': '.08s' }}>Moving out shouldn&apos;t be the price of getting support.</h2>
-            </div>
-            <p className="lede" data-reveal style={{ '--d': '.16s' }}>Most people do better in a home they know. We built the agency around that.</p>
-          </div>
-          <div className="compare-grid">
-            <div className="compare-col them" data-reveal>
-              <h3>Facility-based care</h3>
-              <p>Facilities can mean rotating staff, rigid routines, and leaving a familiar home behind.</p>
-              <div className="marquee" aria-hidden="true">
-                <div className="marquee-track">
-                  <span className="mtag">Leaving home for care</span><span className="mtag">Rotating strangers</span><span className="mtag">One-size-fits-all routines</span><span className="mtag">Families left guessing</span>
-                  <span className="mtag">Leaving home for care</span><span className="mtag">Rotating strangers</span><span className="mtag">One-size-fits-all routines</span><span className="mtag">Families left guessing</span>
-                </div>
-                <div className="marquee-track rev">
-                  <span className="mtag">Institutional feel</span><span className="mtag">Paperwork delays</span><span className="mtag">Unreturned calls</span><span className="mtag">Staffing churn</span>
-                  <span className="mtag">Institutional feel</span><span className="mtag">Paperwork delays</span><span className="mtag">Unreturned calls</span><span className="mtag">Staffing churn</span>
-                </div>
-              </div>
-            </div>
-            <div className="compare-col us" data-reveal style={{ '--d': '.12s' }}>
-              <h3>Sonder Homecare</h3>
-              <p>A small licensed agency, the same caregivers each week, and everyone kept in the loop.</p>
-              <div className="marquee" aria-hidden="true">
-                <div className="marquee-track">
-                  <span className="mtag">Your own home</span><span className="mtag">Consistent caregivers</span><span className="mtag">Person-centered plans</span><span className="mtag">1-business-day replies</span>
-                  <span className="mtag">Your own home</span><span className="mtag">Consistent caregivers</span><span className="mtag">Person-centered plans</span><span className="mtag">1-business-day replies</span>
-                </div>
-                <div className="marquee-track rev">
-                  <span className="mtag">Night supervision covered</span><span className="mtag">Clean 245D documentation</span><span className="mtag">Provider collaboration</span><span className="mtag">Families in the loop</span>
-                  <span className="mtag">Night supervision covered</span><span className="mtag">Clean 245D documentation</span><span className="mtag">Provider collaboration</span><span className="mtag">Families in the loop</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section>
         <div className="wrap">
           <div className="name-strip" data-reveal>

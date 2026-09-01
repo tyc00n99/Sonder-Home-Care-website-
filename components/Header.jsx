@@ -29,8 +29,8 @@ export default function Header() {
           <div className="nav-links">
             <Link href="/#about">About</Link>
             <Link href="/#services">Services</Link>
-            <Link href="/#families">For Families</Link>
-            <Link href="/#professionals">For Professionals</Link>
+            <Link href="/families">For Families</Link>
+            <Link href="/professionals">For Professionals</Link>
             <Link href="/faq">FAQ</Link>
             <Link href="/careers">Careers</Link>
           </div>
@@ -45,8 +45,8 @@ export default function Header() {
         <div className="mobile-menu">
           <Link href="/#about" onClick={close}>About</Link>
           <Link href="/#services" onClick={close}>Services</Link>
-          <Link href="/#families" onClick={close}>For Families</Link>
-          <Link href="/#professionals" onClick={close}>For Professionals</Link>
+          <Link href="/families" onClick={close}>For Families</Link>
+          <Link href="/professionals" onClick={close}>For Professionals</Link>
           <Link href="/faq" onClick={close}>FAQ</Link>
           <Link href="/careers" onClick={close}>Careers</Link>
           <Link href="/#contact" onClick={close}><strong>Refer a client &rarr;</strong></Link>

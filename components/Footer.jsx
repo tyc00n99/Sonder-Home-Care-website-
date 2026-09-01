@@ -19,15 +19,15 @@ export default function Footer() {
               <h4>Explore</h4>
               <Link href="/#about">About</Link>
               <Link href="/#services">Services</Link>
-              <Link href="/#referrals">Referral process</Link>
+              <Link href="/professionals">Referral process</Link>
               <Link href="/faq">FAQ</Link>
               <Link href="/careers">Careers</Link>
             </div>
             <div className="foot-col">
               <h4>For you</h4>
-              <Link href="/#families">Families</Link>
-              <Link href="/#families">Case managers</Link>
-              <Link href="/#professionals">Hospitals &amp; physicians</Link>
+              <Link href="/families">Families</Link>
+              <Link href="/professionals">Case managers</Link>
+              <Link href="/professionals">Hospitals &amp; physicians</Link>
               <Link href="/#contact">Contact</Link>
             </div>
           </div>
