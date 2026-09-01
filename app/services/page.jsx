@@ -24,12 +24,12 @@ export default function ServicesPage() {
           </div>
 
           <div className="info-band" data-reveal style={{ marginTop: 40 }}>
-            <h3>First, the question every family asks: who pays for this?</h3>
+            <h3>Who pays for this?</h3>
             <p>
-              Here is the part nobody explains at discharge. <span className="peach">Medicare does not pay for ongoing care at home.</span> It covers short-term skilled care after an illness or injury, then it stops. Homemaker help, overnight support, personal care on its own, 24-hour coverage: all explicitly excluded.
+              <span className="peach">Not Medicare.</span> Medicare covers short-term care after a hospital stay, then it stops.
             </p>
             <p>
-              Minnesota built its answer into Medical Assistance. Waiver programs, <span className="peach">CADI, Brain Injury, DD, and the Elderly Waiver</span>, exist precisely to fund the daily support Medicare won&apos;t touch, so people can live at home instead of a facility. For most families, waiver services come at no out-of-pocket cost.
+              Minnesota&apos;s Medicaid waivers pick it up from there: <span className="peach">CADI, Brain Injury, DD, and the Elderly Waiver</span>. They pay for everyday help at home, and for most families it costs nothing out of pocket.
             </p>
             <div className="info-steps">
               <div className="istep"><div className="k">Step 1</div><p>Call your county or tribal agency and ask for a MnCHOICES assessment. They have 45 days to complete it.</p></div>
@@ -59,9 +59,8 @@ export default function ServicesPage() {
                 </ul>
                 <div className="mini-h">What changes</div>
                 <ul className="dot-list copper">
-                  <li>Skills that stay after the shift ends. Independence is the outcome, not the slogan</li>
-                  <li>A documented record of progress that case managers can act on</li>
-                  <li>A person with a week that looks like anyone else&apos;s</li>
+                  <li>Real independence, built skill by skill</li>
+                  <li>Progress case managers can see on paper</li>
                 </ul>
               </div>
             </div>
@@ -86,9 +85,8 @@ export default function ServicesPage() {
                 </ul>
                 <div className="mini-h">What changes</div>
                 <ul className="dot-list copper">
-                  <li>The client sleeps at home, not in a facility bed chosen for staffing reasons</li>
-                  <li>The family sleeps at all. That alone changes households</li>
-                  <li>Risk moves from &quot;hope nothing happens&quot; to &quot;someone is there&quot;</li>
+                  <li>The client stays home, safe</li>
+                  <li>The family finally sleeps</li>
                 </ul>
               </div>
             </div>
@@ -98,8 +96,8 @@ export default function ServicesPage() {
                 <div className="dk">03 &middot; For the caregiver who never clocks out</div>
                 <h3>Respite Care</h3>
                 <div className="what">
-                  <p>AARP values the unpaid care American families provide at $600 billion a year, averaging 18 hours a week per caregiver, and more than three quarters of family caregivers report burnout. Those aren&apos;t statistics about strangers. They&apos;re about the spouse, parent, or sibling reading this page.</p>
-                  <p>Respite is short-term care, in the client&apos;s home or another approved setting, planned ahead or arranged fast when a family suddenly needs coverage. It is not a luxury. It is the maintenance schedule for the person holding everything up.</p>
+                  <p>Most family caregivers are running on empty. The care never stops, so they never stop.</p>
+                  <p>Respite is short-term care, in the client&apos;s home or another approved setting, planned ahead or arranged fast when a family suddenly needs coverage. It&apos;s how the person holding everything up gets a real break.</p>
                 </div>
                 <div className="fund-line">Typically funded by <b>CADI, BI, DD, and EW waivers</b>, in-home and out-of-home.</div>
               </div>
@@ -113,9 +111,8 @@ export default function ServicesPage() {
                 </ul>
                 <div className="mini-h">What changes</div>
                 <ul className="dot-list copper">
-                  <li>The family caregiver keeps their job, their health, their marriage</li>
-                  <li>Care at home stays sustainable for years instead of months</li>
-                  <li>The client builds trust with a second caregiver before it&apos;s urgent</li>
+                  <li>Caregivers get their life back, so care at home lasts</li>
+                  <li>A trusted backup before it&apos;s ever urgent</li>
                 </ul>
               </div>
             </div>
@@ -140,9 +137,8 @@ export default function ServicesPage() {
                 </ul>
                 <div className="mini-h">What changes</div>
                 <ul className="dot-list copper">
-                  <li>Fewer falls, better nutrition, fewer preventable ER trips</li>
-                  <li>Dignity: nobody has to be embarrassed by their own kitchen</li>
-                  <li>Visiting family goes back to visiting, not cleaning</li>
+                  <li>Fewer falls, better meals, fewer ER trips</li>
+                  <li>Family visits go back to being visits</li>
                 </ul>
               </div>
             </div>
